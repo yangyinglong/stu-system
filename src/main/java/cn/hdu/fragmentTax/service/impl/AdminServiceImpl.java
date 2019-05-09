@@ -3,12 +3,11 @@ package cn.hdu.fragmentTax.service.impl;
 import cn.hdu.fragmentTax.dao.entity.*;
 import cn.hdu.fragmentTax.dao.mapper.*;
 import cn.hdu.fragmentTax.model.request.AdminExamRequ;
-import cn.hdu.fragmentTax.model.request.AdminQueryRequ;
+import cn.hdu.fragmentTax.model.request.QueryRequ;
 import cn.hdu.fragmentTax.model.response.*;
 import cn.hdu.fragmentTax.service.IAdminService;
 import cn.hdu.fragmentTax.service.impl.model.IAdminModel;
 import cn.hdu.fragmentTax.utils.FormatUtil;
-import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -76,25 +75,27 @@ public class AdminServiceImpl implements IAdminService {
     private IScoreAverageMapper scoreAverageMapper;
 
     @Override
-    public Map<String, Object> showHonorsForTeacher(AdminQueryRequ adminQueryRequ) {
+    public Map<String, Object> showHonorsForTeacher(QueryRequ queryRequ) {
         Map<String, Object> resp = new HashMap<>();
-        String status = FormatUtil.strings2String(getIntAuditStatus(adminQueryRequ.getStatus()));
+        String status = FormatUtil.strings2String(getIntAuditStatus(queryRequ.getStatus()));
         List<HonorEntity> honorEntities = null;
         List<GetHonorResp> getHonorResps = new LinkedList<GetHonorResp>();
-        if (adminQueryRequ.getState() == 1) {
+        List<StuBaseEntity> stuBaseEntities = null;
+        if (queryRequ.getState() == 1) {
 //            辅导员查询
-            honorEntities = honorMapper.queryForAdmin(status);
+            stuBaseEntities = stuBaseMapper.queryForCouner(queryRequ.getStuId(), queryRequ.getStuName());
+
         } else {
 //            导师查询
-            List<StuBaseEntity> stuBaseEntities = stuBaseMapper.queryByTutorId(adminQueryRequ.getUserId());
-            String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
-            if (stuIds.equals("")){
-                resp.put("c", 200);
-                resp.put("r", getHonorResps);
-                return resp;
-            }
-            honorEntities = honorMapper.queryForTutor(status, stuIds);
+            stuBaseEntities = stuBaseMapper.queryByTutorId(queryRequ.getUserId());
         }
+        String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
+        if (stuIds.equals("")){
+            resp.put("c", 200);
+            resp.put("r", getHonorResps);
+            return resp;
+        }
+        honorEntities = honorMapper.queryForTutor(status, stuIds);
         for (HonorEntity honorEntity : honorEntities) {
             StuBaseEntity stuBaseEntity = stuBaseMapper.queryByStuId(honorEntity.getStuId());
             if (FormatUtil.isEmpty(stuBaseEntity)) {
@@ -137,25 +138,27 @@ public class AdminServiceImpl implements IAdminService {
     }
 
     @Override
-    public Map<String, Object> showPapersForTeacher(AdminQueryRequ adminQueryRequ) {
+    public Map<String, Object> showPapersForTeacher(QueryRequ queryRequ) {
         Map<String, Object> resp = new HashMap<>();
-        String status = FormatUtil.strings2String(getIntAuditStatus(adminQueryRequ.getStatus()));
+        String status = FormatUtil.strings2String(getIntAuditStatus(queryRequ.getStatus()));
         List<PaperEntity> paperEntities = null;
         List<GetPaperResp> getPaperResps = new LinkedList<GetPaperResp>();
-        if (adminQueryRequ.getState() == 1) {
+        List<StuBaseEntity> stuBaseEntities = null;
+        if (queryRequ.getState() == 1) {
 //            辅导员查询
-            paperEntities = paperMapper.queryForAdmin(status);
+            stuBaseEntities = stuBaseMapper.queryForCouner(queryRequ.getStuId(), queryRequ.getStuName());
+
         } else {
 //            导师查询
-            List<StuBaseEntity> stuBaseEntities = stuBaseMapper.queryByTutorId(adminQueryRequ.getUserId());
-            String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
-            if (stuIds.equals("")){
-                resp.put("c", 200);
-                resp.put("r", getPaperResps);
-                return resp;
-            }
-            paperEntities = paperMapper.queryForTutor(status, stuIds);
+            stuBaseEntities = stuBaseMapper.queryByTutorId(queryRequ.getUserId());
         }
+        String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
+        if (stuIds.equals("")){
+            resp.put("c", 200);
+            resp.put("r", getPaperResps);
+            return resp;
+        }
+        paperEntities = paperMapper.queryForTutor(status, stuIds);
         for (PaperEntity paperEntity : paperEntities) {
             StuBaseEntity stuBaseEntity = stuBaseMapper.queryByStuId(paperEntity.getStuId());
             if (FormatUtil.isEmpty(stuBaseEntity)) {
@@ -198,25 +201,27 @@ public class AdminServiceImpl implements IAdminService {
     }
 
     @Override
-    public Map<String, Object> showPatentsForTeacher(AdminQueryRequ adminQueryRequ) {
+    public Map<String, Object> showPatentsForTeacher(QueryRequ queryRequ) {
         Map<String, Object> resp = new HashMap<>();
-        String status = FormatUtil.strings2String(getIntAuditStatus(adminQueryRequ.getStatus()));
+        String status = FormatUtil.strings2String(getIntAuditStatus(queryRequ.getStatus()));
         List<PatentEntity> patentEntities = null;
         List<GetPatentResp> getPatentResps = new LinkedList<GetPatentResp>();
-        if (adminQueryRequ.getState() == 1) {
+        List<StuBaseEntity> stuBaseEntities = null;
+        if (queryRequ.getState() == 1) {
 //            辅导员查询
-            patentEntities = patentMapper.queryForAdmin(status);
+            stuBaseEntities = stuBaseMapper.queryForCouner(queryRequ.getStuId(), queryRequ.getStuName());
+
         } else {
 //            导师查询
-            List<StuBaseEntity> stuBaseEntities = stuBaseMapper.queryByTutorId(adminQueryRequ.getUserId());
-            String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
-            if (stuIds.equals("")){
-                resp.put("c", 200);
-                resp.put("r", getPatentResps);
-                return resp;
-            }
-            patentEntities = patentMapper.queryForTutor(status, stuIds);
+            stuBaseEntities = stuBaseMapper.queryByTutorId(queryRequ.getUserId());
         }
+        String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
+        if (stuIds.equals("")){
+            resp.put("c", 200);
+            resp.put("r", getPatentResps);
+            return resp;
+        }
+        patentEntities = patentMapper.queryForTutor(status, stuIds);
         for (PatentEntity patentEntity : patentEntities) {
             StuBaseEntity stuBaseEntity = stuBaseMapper.queryByStuId(patentEntity.getStuId());
             if (FormatUtil.isEmpty(stuBaseEntity)) {
@@ -259,25 +264,27 @@ public class AdminServiceImpl implements IAdminService {
     }
 
     @Override
-    public Map<String, Object> showCompetitionsForTeacher(AdminQueryRequ adminQueryRequ) {
+    public Map<String, Object> showCompetitionsForTeacher(QueryRequ queryRequ) {
         Map<String, Object> resp = new HashMap<>();
-        String status = FormatUtil.strings2String(getIntAuditStatus(adminQueryRequ.getStatus()));
+        String status = FormatUtil.strings2String(getIntAuditStatus(queryRequ.getStatus()));
         List<CompetitionEntity> competitionEntities = null;
         List<GetCompetitionResp> getCompetitionResps = new LinkedList<GetCompetitionResp>();
-        if (adminQueryRequ.getState() == 1) {
+        List<StuBaseEntity> stuBaseEntities = null;
+        if (queryRequ.getState() == 1) {
 //            辅导员查询
-            competitionEntities = competitionMapper.queryForAdmin(status);
+            stuBaseEntities = stuBaseMapper.queryForCouner(queryRequ.getStuId(), queryRequ.getStuName());
+
         } else {
 //            导师查询
-            List<StuBaseEntity> stuBaseEntities = stuBaseMapper.queryByTutorId(adminQueryRequ.getUserId());
-            String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
-            if (stuIds.equals("")){
-                resp.put("c", 200);
-                resp.put("r", getCompetitionResps);
-                return resp;
-            }
-            competitionEntities = competitionMapper.queryForTutor(status, stuIds);
+            stuBaseEntities = stuBaseMapper.queryByTutorId(queryRequ.getUserId());
         }
+        String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
+        if (stuIds.equals("")){
+            resp.put("c", 200);
+            resp.put("r", getCompetitionResps);
+            return resp;
+        }
+        competitionEntities = competitionMapper.queryForTutor(status, stuIds);
         for (CompetitionEntity competitionEntity : competitionEntities) {
             StuBaseEntity stuBaseEntity = stuBaseMapper.queryByStuId(competitionEntity.getStuId());
             if (FormatUtil.isEmpty(stuBaseEntity)) {
@@ -320,25 +327,27 @@ public class AdminServiceImpl implements IAdminService {
     }
 
     @Override
-    public Map<String, Object> showEntrProsForTeacher(AdminQueryRequ adminQueryRequ) {
+    public Map<String, Object> showEntrProsForTeacher(QueryRequ queryRequ) {
         Map<String, Object> resp = new HashMap<>();
-        String status = FormatUtil.strings2String(getIntAuditStatus(adminQueryRequ.getStatus()));
+        String status = FormatUtil.strings2String(getIntAuditStatus(queryRequ.getStatus()));
         List<EntrepreneurialProEntity> entrepreneurialProEntities = null;
         List<GetInnoProResp> getInnoProResps = new LinkedList<GetInnoProResp>();
-        if (adminQueryRequ.getState() == 1) {
+        List<StuBaseEntity> stuBaseEntities = null;
+        if (queryRequ.getState() == 1) {
 //            辅导员查询
-            entrepreneurialProEntities = entrepreneurialProMapper.queryForAdmin(status);
+            stuBaseEntities = stuBaseMapper.queryForCouner(queryRequ.getStuId(), queryRequ.getStuName());
+
         } else {
 //            导师查询
-            List<StuBaseEntity> stuBaseEntities = stuBaseMapper.queryByTutorId(adminQueryRequ.getUserId());
-            String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
-            if (stuIds.equals("")){
-                resp.put("c", 200);
-                resp.put("r", getInnoProResps);
-                return resp;
-            }
-            entrepreneurialProEntities = entrepreneurialProMapper.queryForTutor(status, stuIds);
+            stuBaseEntities = stuBaseMapper.queryByTutorId(queryRequ.getUserId());
         }
+        String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
+        if (stuIds.equals("")){
+            resp.put("c", 200);
+            resp.put("r", getInnoProResps);
+            return resp;
+        }
+        entrepreneurialProEntities = entrepreneurialProMapper.queryForTutor(status, stuIds);
         for (EntrepreneurialProEntity entrepreneurialProEntity : entrepreneurialProEntities) {
             StuBaseEntity stuBaseEntity = stuBaseMapper.queryByStuId(entrepreneurialProEntity.getStuId());
             if (FormatUtil.isEmpty(stuBaseEntity)) {
@@ -381,25 +390,27 @@ public class AdminServiceImpl implements IAdminService {
     }
 
     @Override
-    public Map<String, Object> showInnoProsForTeacher(AdminQueryRequ adminQueryRequ) {
+    public Map<String, Object> showInnoProsForTeacher(QueryRequ queryRequ) {
         Map<String, Object> resp = new HashMap<>();
-        String status = FormatUtil.strings2String(getIntAuditStatus(adminQueryRequ.getStatus()));
+        String status = FormatUtil.strings2String(getIntAuditStatus(queryRequ.getStatus()));
         List<InnovativeProEntity> innovativeProEntities = null;
         List<GetInnoProResp> getInnoProResps = new LinkedList<GetInnoProResp>();
-        if (adminQueryRequ.getState() == 1) {
+        List<StuBaseEntity> stuBaseEntities = null;
+        if (queryRequ.getState() == 1) {
 //            辅导员查询
-            innovativeProEntities = innovativeProMapper.queryForAdmin(status);
+            stuBaseEntities = stuBaseMapper.queryForCouner(queryRequ.getStuId(), queryRequ.getStuName());
+
         } else {
 //            导师查询
-            List<StuBaseEntity> stuBaseEntities = stuBaseMapper.queryByTutorId(adminQueryRequ.getUserId());
-            String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
-            if (stuIds.equals("")){
-                resp.put("c", 200);
-                resp.put("r", getInnoProResps);
-                return resp;
-            }
-            innovativeProEntities = innovativeProMapper.queryForTutor(status, stuIds);
+            stuBaseEntities = stuBaseMapper.queryByTutorId(queryRequ.getUserId());
         }
+        String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
+        if (stuIds.equals("")){
+            resp.put("c", 200);
+            resp.put("r", getInnoProResps);
+            return resp;
+        }
+        innovativeProEntities = innovativeProMapper.queryForTutor(status, stuIds);
         for (InnovativeProEntity innovativeProEntity : innovativeProEntities) {
             StuBaseEntity stuBaseEntity = stuBaseMapper.queryByStuId(innovativeProEntity.getStuId());
             if (FormatUtil.isEmpty(stuBaseEntity)) {
@@ -442,25 +453,27 @@ public class AdminServiceImpl implements IAdminService {
     }
 
     @Override
-    public Map<String, Object> showEngiProsForTeacher(AdminQueryRequ adminQueryRequ) {
+    public Map<String, Object> showEngiProsForTeacher(QueryRequ queryRequ) {
         Map<String, Object> resp = new HashMap<>();
-        String status = FormatUtil.strings2String(getIntAuditStatus(adminQueryRequ.getStatus()));
+        String status = FormatUtil.strings2String(getIntAuditStatus(queryRequ.getStatus()));
         List<EngineeringProEntity> engineeringProEntities = null;
         List<GetEngiProResp> getEngiProResps = new LinkedList<GetEngiProResp>();
-        if (adminQueryRequ.getState() == 1) {
+        List<StuBaseEntity> stuBaseEntities = null;
+        if (queryRequ.getState() == 1) {
 //            辅导员查询
-            engineeringProEntities = engineeringProMapper.queryForAdmin(status);
+            stuBaseEntities = stuBaseMapper.queryForCouner(queryRequ.getStuId(), queryRequ.getStuName());
+
         } else {
 //            导师查询
-            List<StuBaseEntity> stuBaseEntities = stuBaseMapper.queryByTutorId(adminQueryRequ.getUserId());
-            String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
-            if (stuIds.equals("")){
-                resp.put("c", 200);
-                resp.put("r", getEngiProResps);
-                return resp;
-            }
-            engineeringProEntities = engineeringProMapper.queryForTutor(status, stuIds);
+            stuBaseEntities = stuBaseMapper.queryByTutorId(queryRequ.getUserId());
         }
+        String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
+        if (stuIds.equals("")){
+            resp.put("c", 200);
+            resp.put("r", getEngiProResps);
+            return resp;
+        }
+        engineeringProEntities = engineeringProMapper.queryForTutor(status, stuIds);
         for (EngineeringProEntity engineeringProEntity : engineeringProEntities) {
             StuBaseEntity stuBaseEntity = stuBaseMapper.queryByStuId(engineeringProEntity.getStuId());
             if (FormatUtil.isEmpty(stuBaseEntity)) {
@@ -503,25 +516,27 @@ public class AdminServiceImpl implements IAdminService {
     }
 
     @Override
-    public Map<String, Object> showAcadExchsForTeacher(AdminQueryRequ adminQueryRequ) {
+    public Map<String, Object> showAcadExchsForTeacher(QueryRequ queryRequ) {
         Map<String, Object> resp = new HashMap<>();
-        String status = FormatUtil.strings2String(getIntAuditStatus(adminQueryRequ.getStatus()));
+        String status = FormatUtil.strings2String(getIntAuditStatus(queryRequ.getStatus()));
         List<AcademicExchangeEntity> academicExchangeEntities = null;
         List<GetAcadExchResp> getAcadExchResps = new LinkedList<GetAcadExchResp>();
-        if (adminQueryRequ.getState() == 1) {
+        List<StuBaseEntity> stuBaseEntities = null;
+        if (queryRequ.getState() == 1) {
 //            辅导员查询
-            academicExchangeEntities = academicExchangeMapper.queryForAdmin(status);
+            stuBaseEntities = stuBaseMapper.queryForCouner(queryRequ.getStuId(), queryRequ.getStuName());
+
         } else {
 //            导师查询
-            List<StuBaseEntity> stuBaseEntities = stuBaseMapper.queryByTutorId(adminQueryRequ.getUserId());
-            String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
-            if (stuIds.equals("")){
-                resp.put("c", 200);
-                resp.put("r", getAcadExchResps);
-                return resp;
-            }
-            academicExchangeEntities = academicExchangeMapper.queryForTutor(status, stuIds);
+            stuBaseEntities = stuBaseMapper.queryByTutorId(queryRequ.getUserId());
         }
+        String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
+        if (stuIds.equals("")){
+            resp.put("c", 200);
+            resp.put("r", getAcadExchResps);
+            return resp;
+        }
+        academicExchangeEntities = academicExchangeMapper.queryForTutor(status, stuIds);
         for (AcademicExchangeEntity academicExchangeEntity : academicExchangeEntities) {
             StuBaseEntity stuBaseEntity = stuBaseMapper.queryByStuId(academicExchangeEntity.getStuId());
             if (FormatUtil.isEmpty(stuBaseEntity)) {
@@ -564,25 +579,27 @@ public class AdminServiceImpl implements IAdminService {
     }
 
     @Override
-    public Map<String, Object> showMasterPapersForTeacher(AdminQueryRequ adminQueryRequ) {
+    public Map<String, Object> showMasterPapersForTeacher(QueryRequ queryRequ) {
         Map<String, Object> resp = new HashMap<>();
-        String status = FormatUtil.strings2String(getIntAuditStatus(adminQueryRequ.getStatus()));
+        String status = FormatUtil.strings2String(getIntAuditStatus(queryRequ.getStatus()));
         List<MasterPaperEntity> masterPaperEntities = null;
         List<GetMasterPaperResp> getMasterPaperResps = new LinkedList<GetMasterPaperResp>();
-        if (adminQueryRequ.getState() == 1) {
+        List<StuBaseEntity> stuBaseEntities = null;
+        if (queryRequ.getState() == 1) {
 //            辅导员查询
-            masterPaperEntities = masterPaperMapper.queryForAdmin(status);
+            stuBaseEntities = stuBaseMapper.queryForCouner(queryRequ.getStuId(), queryRequ.getStuName());
+
         } else {
 //            导师查询
-            List<StuBaseEntity> stuBaseEntities = stuBaseMapper.queryByTutorId(adminQueryRequ.getUserId());
-            String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
-            if (stuIds.equals("")){
-                resp.put("c", 200);
-                resp.put("r", getMasterPaperResps);
-                return resp;
-            }
-            masterPaperEntities = masterPaperMapper.queryForTutor(status, stuIds);
+            stuBaseEntities = stuBaseMapper.queryByTutorId(queryRequ.getUserId());
         }
+        String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
+        if (stuIds.equals("")){
+            resp.put("c", 200);
+            resp.put("r", getMasterPaperResps);
+            return resp;
+        }
+        masterPaperEntities = masterPaperMapper.queryForTutor(status, stuIds);
         for (MasterPaperEntity masterPaperEntity : masterPaperEntities) {
             StuBaseEntity stuBaseEntity = stuBaseMapper.queryByStuId(masterPaperEntity.getStuId());
             if (FormatUtil.isEmpty(stuBaseEntity)) {
@@ -625,25 +642,27 @@ public class AdminServiceImpl implements IAdminService {
     }
 
     @Override
-    public Map<String, Object> showWorksForTeacher(AdminQueryRequ adminQueryRequ) {
+    public Map<String, Object> showWorksForTeacher(QueryRequ queryRequ) {
         Map<String, Object> resp = new HashMap<>();
-        String status = FormatUtil.strings2String(getIntAuditStatus(adminQueryRequ.getStatus()));
+        String status = FormatUtil.strings2String(getIntAuditStatus(queryRequ.getStatus()));
         List<WorkEntity> workEntities = null;
         List<GetWorkResp> getWorkResps = new LinkedList<GetWorkResp>();
-        if (adminQueryRequ.getState() == 1) {
+        List<StuBaseEntity> stuBaseEntities = null;
+        if (queryRequ.getState() == 1) {
 //            辅导员查询
-            workEntities = workMapper.queryForAdmin(status);
+            stuBaseEntities = stuBaseMapper.queryForCouner(queryRequ.getStuId(), queryRequ.getStuName());
+
         } else {
 //            导师查询
-            List<StuBaseEntity> stuBaseEntities = stuBaseMapper.queryByTutorId(adminQueryRequ.getUserId());
-            String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
-            if (stuIds.equals("")){
-                resp.put("c", 200);
-                resp.put("r", getWorkResps);
-                return resp;
-            }
-            workEntities = workMapper.queryForTutor(status, stuIds);
+            stuBaseEntities = stuBaseMapper.queryByTutorId(queryRequ.getUserId());
         }
+        String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
+        if (stuIds.equals("")){
+            resp.put("c", 200);
+            resp.put("r", getWorkResps);
+            return resp;
+        }
+        workEntities = workMapper.queryForTutor(status, stuIds);
         for (WorkEntity workEntity : workEntities) {
             StuBaseEntity stuBaseEntity = stuBaseMapper.queryByStuId(workEntity.getStuId());
             if (FormatUtil.isEmpty(stuBaseEntity)) {
@@ -686,16 +705,17 @@ public class AdminServiceImpl implements IAdminService {
     }
 
     @Override
-    public Map<String, Object> showStusForTeacher(AdminQueryRequ adminQueryRequ) {
+    public Map<String, Object> showStusForTeacher(QueryRequ queryRequ) {
         Map<String, Object> resp = new HashMap<>();
         List<StuBaseEntity> stuBaseEntities = null;
         List<GetStuForTeacherResp> getStuForTeacherResps = new LinkedList<GetStuForTeacherResp>();
-        if (adminQueryRequ.getState() == 1) {
+        if (queryRequ.getState() == 1) {
 //            辅导员查询
-            stuBaseEntities = stuBaseMapper.queryAll();
+//            stuBaseEntities = stuBaseMapper.queryAll();
+            stuBaseEntities = stuBaseMapper.queryForCouner(queryRequ.getStuId(), queryRequ.getStuName());
         } else {
 //            导师查询
-            stuBaseEntities = stuBaseMapper.queryByTutorId(adminQueryRequ.getUserId());
+            stuBaseEntities = stuBaseMapper.queryByTutorId(queryRequ.getUserId());
         }
         for (StuBaseEntity stuBaseEntity : stuBaseEntities) {
             TutorsEntity tutorsEntity = tutorsMapper.queryByTuId(stuBaseEntity.getTutorId());
@@ -711,22 +731,22 @@ public class AdminServiceImpl implements IAdminService {
     }
 
     @Override
-    public Map<String, Object> showAllPrizeForTeacher(AdminQueryRequ adminQueryRequ) {
+    public Map<String, Object> showAllPrizeForTeacher(QueryRequ queryRequ) {
         Map<String, Object> resp = new HashMap<>();
         List<StuBaseEntity> stuBaseEntities = null;
         List<GetPrizeForTeacherResp> getPrizeForTeacherResps = new LinkedList<GetPrizeForTeacherResp>();
-        if (adminQueryRequ.getState() == 1) {
+        if (queryRequ.getState() == 1) {
 //            辅导员查询
-            stuBaseEntities = stuBaseMapper.queryAll();
+            stuBaseEntities = stuBaseMapper.queryForCouner(queryRequ.getStuId(), queryRequ.getStuName());
         } else {
 //            导师查询
-            stuBaseEntities = stuBaseMapper.queryByTutorId(adminQueryRequ.getUserId());
+            stuBaseEntities = stuBaseMapper.queryByTutorId(queryRequ.getUserId());
         }
         Integer allStuNum = stuBaseMapper.queryCount();
         for (StuBaseEntity stuBaseEntity : stuBaseEntities) {
-           AllPrizeEntity allPrizeEntity = allPrizeMapper.queryByStuId(stuBaseEntity.getStuId());
-           GetPrizeForTeacherResp getPrizeForTeacherResp = adminModel.createGetPrizeForTeacherResp(allPrizeEntity, stuBaseEntity, allStuNum);
-           getPrizeForTeacherResps.add(getPrizeForTeacherResp);
+            AllPrizeEntity allPrizeEntity = allPrizeMapper.queryByStuId(stuBaseEntity.getStuId());
+            GetPrizeForTeacherResp getPrizeForTeacherResp = adminModel.createGetPrizeForTeacherResp(allPrizeEntity, stuBaseEntity, allStuNum);
+            getPrizeForTeacherResps.add(getPrizeForTeacherResp);
         }
         resp.put("c", 200);
         resp.put("r", getPrizeForTeacherResps);
@@ -734,16 +754,16 @@ public class AdminServiceImpl implements IAdminService {
     }
 
     @Override
-    public Map<String, Object> showScoresForTeacher(AdminQueryRequ adminQueryRequ) {
+    public Map<String, Object> showScoresForTeacher(QueryRequ queryRequ) {
         Map<String, Object> resp = new HashMap<>();
         List<StuBaseEntity> stuBaseEntities = null;
         List<GetAllScoreResp> getAllScoreResps = new LinkedList<GetAllScoreResp>();
-        if (adminQueryRequ.getState() == 1) {
+        if (queryRequ.getState() == 1) {
 //            辅导员查询
-            stuBaseEntities = stuBaseMapper.queryAll();
+            stuBaseEntities = stuBaseMapper.queryForCouner(queryRequ.getStuId(), queryRequ.getStuName());
         } else {
 //            导师查询
-            stuBaseEntities = stuBaseMapper.queryByTutorId(adminQueryRequ.getUserId());
+            stuBaseEntities = stuBaseMapper.queryByTutorId(queryRequ.getUserId());
         }
         for (StuBaseEntity stuBaseEntity : stuBaseEntities) {
             ScoreAllEntity scoreAllEntity = scoreAllMapper.queryByStuId(stuBaseEntity.getStuId());

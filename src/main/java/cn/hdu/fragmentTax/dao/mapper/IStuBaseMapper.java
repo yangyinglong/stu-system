@@ -145,4 +145,29 @@ public interface IStuBaseMapper {
     })
     int queryCount();
 
+    @Select("SELECT `id`, `stu_id`, `name`, `phone`, `sex`, `u_school`, `u_major`, `counsellor_id`, `tutor_id`, `state`, `created_time`, `changed_time`, `id_card`, `master_major`, `political_outlook`, `biogenic_land`, `master_direction`, `e_mail`, `emergency_contact`, `emergency_phone`, `secretary` FROM `stu_base` WHERE `stu_id` like #{stuId} and `name` like #{stuName} and `state` = 1")
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "stuId", column = "stu_id"),
+            @Result(property = "name", column = "name"),
+            @Result(property = "phone", column = "phone"),
+            @Result(property = "sex", column = "sex"),
+            @Result(property = "uSchool", column = "u_school"),
+            @Result(property = "uMajor", column = "u_major"),
+            @Result(property = "counsellorId", column = "counsellor_id"),
+            @Result(property = "tutorId", column = "tutor_id"),
+            @Result(property = "state", column = "state"),
+            @Result(property = "createdTime", column = "created_time"),
+            @Result(property = "changedTime", column = "changed_time"),
+            @Result(property = "idCard", column = "id_card"),
+            @Result(property = "masterMajor", column = "master_major"),
+            @Result(property = "politicalOutlook", column = "political_outlook"),
+            @Result(property = "biogenicLand", column = "biogenic_land"),
+            @Result(property = "masterDirection", column = "master_direction"),
+            @Result(property = "eMail", column = "e_mail"),
+            @Result(property = "emergencyContact", column = "emergency_contact"),
+            @Result(property = "emergencyPhone", column = "emergency_phone"),
+            @Result(property = "secretary", column = "secretary")
+    })
+    List<StuBaseEntity> queryForCouner(@Param("stuId") String stuId, @Param("stuName") String stuName);
 }

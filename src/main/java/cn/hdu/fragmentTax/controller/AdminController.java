@@ -3,6 +3,7 @@ package cn.hdu.fragmentTax.controller;
 
 import cn.hdu.fragmentTax.model.request.AdminExamRequ;
 import cn.hdu.fragmentTax.model.request.AdminQueryRequ;
+import cn.hdu.fragmentTax.model.request.QueryRequ;
 import cn.hdu.fragmentTax.service.IAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -30,8 +31,8 @@ public class AdminController {
     @Path("/showHonorsForTeacher")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Map<String, Object> showHonorsForTeacher(AdminQueryRequ adminQueryRequ){
-        Map<String, Object> resp = adminService.showHonorsForTeacher(adminQueryRequ);
+    public Map<String, Object> showHonorsForTeacher(QueryRequ queryRequ){
+        Map<String, Object> resp = adminService.showHonorsForTeacher(queryRequ);
         return resp;
     }
 
@@ -56,8 +57,8 @@ public class AdminController {
     @Path("/showPapersForTeacher")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Map<String, Object> showPapersForTeacher(AdminQueryRequ adminQueryRequ){
-        Map<String, Object> resp = adminService.showPapersForTeacher(adminQueryRequ);
+    public Map<String, Object> showPapersForTeacher(QueryRequ queryRequ){
+        Map<String, Object> resp = adminService.showPapersForTeacher(queryRequ);
         return resp;
     }
 
@@ -82,8 +83,8 @@ public class AdminController {
     @Path("/showPatentsForTeacher")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Map<String, Object> showPatentsForTeacher(AdminQueryRequ adminQueryRequ){
-        Map<String, Object> resp = adminService.showPatentsForTeacher(adminQueryRequ);
+    public Map<String, Object> showPatentsForTeacher(QueryRequ queryRequ){
+        Map<String, Object> resp = adminService.showPatentsForTeacher(queryRequ);
         return resp;
     }
 
@@ -108,8 +109,8 @@ public class AdminController {
     @Path("/showCompetitionsForTeacher")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Map<String, Object> showCompetitionsForTeacher(AdminQueryRequ adminQueryRequ){
-        Map<String, Object> resp = adminService.showCompetitionsForTeacher(adminQueryRequ);
+    public Map<String, Object> showCompetitionsForTeacher(QueryRequ queryRequ){
+        Map<String, Object> resp = adminService.showCompetitionsForTeacher(queryRequ);
         return resp;
     }
 
@@ -134,8 +135,8 @@ public class AdminController {
     @Path("/showEntrProsForTeacher")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Map<String, Object> showEntrProsForTeacher(AdminQueryRequ adminQueryRequ){
-        Map<String, Object> resp = adminService.showEntrProsForTeacher(adminQueryRequ);
+    public Map<String, Object> showEntrProsForTeacher(QueryRequ queryRequ){
+        Map<String, Object> resp = adminService.showEntrProsForTeacher(queryRequ);
         return resp;
     }
 
@@ -160,8 +161,8 @@ public class AdminController {
     @Path("/showInnoProsForTeacher")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Map<String, Object> showInnoProsForTeacher(AdminQueryRequ adminQueryRequ){
-        Map<String, Object> resp = adminService.showInnoProsForTeacher(adminQueryRequ);
+    public Map<String, Object> showInnoProsForTeacher(QueryRequ queryRequ){
+        Map<String, Object> resp = adminService.showInnoProsForTeacher(queryRequ);
         return resp;
     }
 
@@ -186,8 +187,8 @@ public class AdminController {
     @Path("/showEngiProsForTeacher")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Map<String, Object> showEngiProsForTeacher(AdminQueryRequ adminQueryRequ){
-        Map<String, Object> resp = adminService.showEngiProsForTeacher(adminQueryRequ);
+    public Map<String, Object> showEngiProsForTeacher(QueryRequ queryRequ){
+        Map<String, Object> resp = adminService.showEngiProsForTeacher(queryRequ);
         return resp;
     }
 
@@ -212,8 +213,8 @@ public class AdminController {
     @Path("/showAcadExchsForTeacher")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Map<String, Object> showAcadExchsForTeacher(AdminQueryRequ adminQueryRequ){
-        Map<String, Object> resp = adminService.showAcadExchsForTeacher(adminQueryRequ);
+    public Map<String, Object> showAcadExchsForTeacher(QueryRequ queryRequ){
+        Map<String, Object> resp = adminService.showAcadExchsForTeacher(queryRequ);
         return resp;
     }
 
@@ -238,8 +239,8 @@ public class AdminController {
     @Path("/showMasterPapersForTeacher")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Map<String, Object> showMasterPapersForTeacher(AdminQueryRequ adminQueryRequ){
-        Map<String, Object> resp = adminService.showMasterPapersForTeacher(adminQueryRequ);
+    public Map<String, Object> showMasterPapersForTeacher(QueryRequ queryRequ){
+        Map<String, Object> resp = adminService.showMasterPapersForTeacher(queryRequ);
         return resp;
     }
 
@@ -264,8 +265,8 @@ public class AdminController {
     @Path("/showWorksForTeacher")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Map<String, Object> showWorksForTeacher(AdminQueryRequ adminQueryRequ){
-        Map<String, Object> resp = adminService.showWorksForTeacher(adminQueryRequ);
+    public Map<String, Object> showWorksForTeacher(QueryRequ queryRequ){
+        Map<String, Object> resp = adminService.showWorksForTeacher(queryRequ);
         return resp;
     }
 
@@ -290,8 +291,8 @@ public class AdminController {
     @Path("/showStusForTeacher")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Map<String, Object> showStusForTeacher(AdminQueryRequ adminQueryRequ){
-        Map<String, Object> resp = adminService.showStusForTeacher(adminQueryRequ);
+    public Map<String, Object> showStusForTeacher(QueryRequ queryRequ){
+        Map<String, Object> resp = adminService.showStusForTeacher(queryRequ);
         return resp;
     }
 
@@ -303,7 +304,7 @@ public class AdminController {
     @Path("/showAllPrizeForTeacher")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Map<String, Object> showAllPrizeForTeacher(AdminQueryRequ adminQueryRequ){
+    public Map<String, Object> showAllPrizeForTeacher(QueryRequ adminQueryRequ){
         Map<String, Object> resp = adminService.showAllPrizeForTeacher(adminQueryRequ);
         return resp;
     }
@@ -311,8 +312,8 @@ public class AdminController {
     @Path("/showScoresForTeacher")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Map<String, Object> showScoresForTeacher(AdminQueryRequ adminQueryRequ){
-        Map<String, Object> resp = adminService.showScoresForTeacher(adminQueryRequ);
+    public Map<String, Object> showScoresForTeacher(QueryRequ queryRequ){
+        Map<String, Object> resp = adminService.showScoresForTeacher(queryRequ);
         return resp;
     }
 }
