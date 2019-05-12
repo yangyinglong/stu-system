@@ -27,6 +27,7 @@ import java.util.Map;
 @CrossOrigin
 public class FileController {
     private static final String IMAGE_PATH = PropertiesUtil.prop("img_path");
+    private static final String EXCEL_PATH = PropertiesUtil.prop("file_path");
 
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -75,6 +76,26 @@ public class FileController {
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
     public Response downloadFile(@QueryParam("fileName") String fileName){
         File file = new File(IMAGE_PATH + fileName);
+        //如果文件不存在，提示404
+        if (!file.exists()) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        try {
+            fileName = URLEncoder.encode(fileName, "UTF-8");
+        } catch (UnsupportedEncodingException e1) {
+            e1.printStackTrace();
+        }
+
+        return Response
+                .ok(file)
+                .header("Content-disposition", "attachment;filename=" + fileName).build();
+    }
+
+    @Path("/downloadExcel")
+    @GET
+    @Produces(MediaType.APPLICATION_OCTET_STREAM)
+    public Response downloadExcel(@QueryParam("fileName") String fileName){
+        File file = new File(EXCEL_PATH + fileName);
         //如果文件不存在，提示404
         if (!file.exists()) {
             return Response.status(Response.Status.NOT_FOUND).build();

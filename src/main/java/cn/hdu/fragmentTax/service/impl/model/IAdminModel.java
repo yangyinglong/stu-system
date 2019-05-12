@@ -2,6 +2,7 @@ package cn.hdu.fragmentTax.service.impl.model;
 
 import cn.hdu.fragmentTax.dao.entity.*;
 import cn.hdu.fragmentTax.model.response.*;
+import org.apache.poi.ss.usermodel.Workbook;
 
 public interface IAdminModel {
     GetHonorResp createGetHonorResp(HonorEntity honorEntity, StuBaseEntity stuBaseEntity);
@@ -29,4 +30,6 @@ public interface IAdminModel {
     GetPrizeForTeacherResp createGetPrizeForTeacherResp(AllPrizeEntity allPrizeEntity, StuBaseEntity stuBaseEntity, int allStuNum);
 
     GetAllScoreResp createGetAllScoreResp(ScoreAllEntity scoreAllEntity);
+
+    void writeStuBaseInfoIntoExcel(Workbook workbook, GetStuForTeacherResp getStuForTeacherResp, int index);
 }

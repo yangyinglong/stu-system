@@ -7,10 +7,15 @@ import cn.hdu.fragmentTax.model.request.QueryRequ;
 import cn.hdu.fragmentTax.model.response.*;
 import cn.hdu.fragmentTax.service.IAdminService;
 import cn.hdu.fragmentTax.service.impl.model.IAdminModel;
+import cn.hdu.fragmentTax.utils.DateUtil;
+import cn.hdu.fragmentTax.utils.ExcelUtil;
 import cn.hdu.fragmentTax.utils.FormatUtil;
+import cn.hdu.fragmentTax.utils.PropertiesUtil;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -780,6 +785,32 @@ public class AdminServiceImpl implements IAdminService {
         }
         resp.put("c", 200);
         resp.put("r", getAllScoreResps);
+        return resp;
+    }
+
+    @Override
+    public Map<String, Object> downStusForTeacher(QueryRequ queryRequ) {
+        Map<String, Object> resp = new HashMap<>();
+        resp = showStusForTeacher(queryRequ);
+        if (200 != (Integer)resp.get("c")) {
+            return resp;
+        }
+        List<GetStuForTeacherResp> getStuForTeacherResps = (List<GetStuForTeacherResp>)resp.get("r");
+        try {
+            Workbook workbook = ExcelUtil.copyFile(PropertiesUtil.prop("template_path"));
+            int index = 1;
+            for (GetStuForTeacherResp getStuForTeacherResp : getStuForTeacherResps) {
+                adminModel.writeStuBaseInfoIntoExcel(workbook, getStuForTeacherResp, index);
+                index = index + 1;
+            }
+            String fileName = DateUtil.getCurrentDatetime().split(" ")[0] + ".xlsx";
+            ExcelUtil.save(workbook, PropertiesUtil.prop("file_path") + fileName);
+            resp.put("c", 200);
+            resp.put("r", fileName);
+        } catch (IOException e) {
+            resp.put("c", 311);
+            resp.put("r", "文件创建错误");
+        }
         return resp;
     }
 

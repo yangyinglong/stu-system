@@ -2,7 +2,6 @@ package cn.hdu.fragmentTax.controller;
 
 
 import cn.hdu.fragmentTax.model.request.AdminExamRequ;
-import cn.hdu.fragmentTax.model.request.AdminQueryRequ;
 import cn.hdu.fragmentTax.model.request.QueryRequ;
 import cn.hdu.fragmentTax.service.IAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +24,7 @@ public class AdminController {
 
     /**
      * 管理员或导师查看荣誉与奖项
-     * @param adminQueryRequ
+     * @param queryRequ
      * @return
      */
     @Path("/showHonorsForTeacher")
@@ -51,7 +50,7 @@ public class AdminController {
 
     /**
      * 管理员或者导师查看学术论文
-     * @param adminQueryRequ
+     * @param queryRequ
      * @return
      */
     @Path("/showPapersForTeacher")
@@ -77,7 +76,7 @@ public class AdminController {
 
     /**
      * 管理员或者导师查看发明专利
-     * @param adminQueryRequ
+     * @param queryRequ
      * @return
      */
     @Path("/showPatentsForTeacher")
@@ -103,7 +102,7 @@ public class AdminController {
 
     /**
      * 管理员或者导师查看竞赛
-     * @param adminQueryRequ
+     * @param queryRequ
      * @return
      */
     @Path("/showCompetitionsForTeacher")
@@ -129,7 +128,7 @@ public class AdminController {
 
     /**
      * 管理员或者导师查看创业项目
-     * @param adminQueryRequ
+     * @param queryRequ
      * @return
      */
     @Path("/showEntrProsForTeacher")
@@ -155,7 +154,7 @@ public class AdminController {
 
     /**
      * 管理员或者导师查看创新项目
-     * @param adminQueryRequ
+     * @param queryRequ
      * @return
      */
     @Path("/showInnoProsForTeacher")
@@ -181,7 +180,7 @@ public class AdminController {
 
     /**
      * 管理员或者导师查看创业项目
-     * @param adminQueryRequ
+     * @param queryRequ
      * @return
      */
     @Path("/showEngiProsForTeacher")
@@ -207,7 +206,7 @@ public class AdminController {
 
     /**
      * 管理员或者导师查看学术交流
-     * @param adminQueryRequ
+     * @param queryRequ
      * @return
      */
     @Path("/showAcadExchsForTeacher")
@@ -233,7 +232,7 @@ public class AdminController {
 
     /**
      * 管理员或者导师查看硕士论文
-     * @param adminQueryRequ
+     * @param queryRequ
      * @return
      */
     @Path("/showMasterPapersForTeacher")
@@ -259,7 +258,7 @@ public class AdminController {
 
     /**
      * 管理员或者导师查看就业深造
-     * @param adminQueryRequ
+     * @param queryRequ
      * @return
      */
     @Path("/showWorksForTeacher")
@@ -285,7 +284,7 @@ public class AdminController {
 
     /**
      * 管理员或者导师查看学生基本信息
-     * @param adminQueryRequ
+     * @param queryRequ
      * @return
      */
     @Path("/showStusForTeacher")
@@ -298,14 +297,14 @@ public class AdminController {
 
     /**
      * 管理员或者导师查看学生的综合素质
-     * @param adminQueryRequ
+     * @param queryRequ
      * @return
      */
     @Path("/showAllPrizeForTeacher")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Map<String, Object> showAllPrizeForTeacher(QueryRequ adminQueryRequ){
-        Map<String, Object> resp = adminService.showAllPrizeForTeacher(adminQueryRequ);
+    public Map<String, Object> showAllPrizeForTeacher(QueryRequ queryRequ){
+        Map<String, Object> resp = adminService.showAllPrizeForTeacher(queryRequ);
         return resp;
     }
 
@@ -316,4 +315,14 @@ public class AdminController {
         Map<String, Object> resp = adminService.showScoresForTeacher(queryRequ);
         return resp;
     }
+
+    @Path("/downStusForTeacher")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Map<String, Object> downStusForTeacher(QueryRequ queryRequ){
+        Map<String, Object> resp = adminService.downStusForTeacher(queryRequ);
+        return resp;
+    }
+
+
 }

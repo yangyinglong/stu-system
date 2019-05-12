@@ -4,7 +4,9 @@ import cn.hdu.fragmentTax.dao.entity.*;
 import cn.hdu.fragmentTax.dao.mapper.IStuBaseMapper;
 import cn.hdu.fragmentTax.model.response.*;
 import cn.hdu.fragmentTax.service.impl.model.IAdminModel;
+import cn.hdu.fragmentTax.utils.ExcelUtil;
 import cn.hdu.fragmentTax.utils.FormatUtil;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -378,5 +380,33 @@ public class AdminModelImpl implements IAdminModel {
 
         BeanUtils.copyProperties(scoreAllEntity, getAllScoreResp);
         return getAllScoreResp;
+    }
+
+    @Override
+    public void writeStuBaseInfoIntoExcel(Workbook workbook, GetStuForTeacherResp getStuForTeacherResp, int index) {
+        ExcelUtil.write(workbook, 0, index, 0, getStuForTeacherResp.getStuId());
+        ExcelUtil.write(workbook, 0, index, 1, getStuForTeacherResp.getName());
+        ExcelUtil.write(workbook, 0, index, 2, getStuForTeacherResp.getSex());
+        ExcelUtil.write(workbook, 0, index, 3, getStuForTeacherResp.getMasterMajor());
+        ExcelUtil.write(workbook, 0, index, 4, getStuForTeacherResp.getMasterDirection());
+        ExcelUtil.write(workbook, 0, index, 5, getStuForTeacherResp.getTuturName());
+        ExcelUtil.write(workbook, 0, index, 6, getStuForTeacherResp.getCounsellorName());
+        ExcelUtil.write(workbook, 0, index, 7, getStuForTeacherResp.getSecretary());
+        ExcelUtil.write(workbook, 0, index, 8, getStuForTeacherResp.getPhone());
+        ExcelUtil.write(workbook, 0, index, 9, getStuForTeacherResp.getIdCard());
+        ExcelUtil.write(workbook, 0, index, 10, getStuForTeacherResp.getPoliticalOutlook());
+        ExcelUtil.write(workbook, 0, index, 11, getStuForTeacherResp.getBiogenicLand());
+        ExcelUtil.write(workbook, 0, index, 12, getStuForTeacherResp.geteMail());
+        ExcelUtil.write(workbook, 0, index, 13, getStuForTeacherResp.getEmergencyContact());
+        ExcelUtil.write(workbook, 0, index, 14, getStuForTeacherResp.getEmergencyPhone());
+        ExcelUtil.write(workbook, 0, index, 15, getStuForTeacherResp.getuSchool());
+        ExcelUtil.write(workbook, 0, index, 16, getStuForTeacherResp.getuMajor());
+        ExcelUtil.write(workbook, 0, index, 17, String.valueOf(getStuForTeacherResp.getEnglish()));
+        ExcelUtil.write(workbook, 0, index, 18, String.valueOf(getStuForTeacherResp.getPolitical()));
+        ExcelUtil.write(workbook, 0, index, 19, String.valueOf(getStuForTeacherResp.getMath()));
+        ExcelUtil.write(workbook, 0, index, 20, String.valueOf(getStuForTeacherResp.getSpecialized()));
+        ExcelUtil.write(workbook, 0, index, 21, String.valueOf(getStuForTeacherResp.getLanguagesTypes()));
+        ExcelUtil.write(workbook, 0, index, 22, String.valueOf(getStuForTeacherResp.getLanguagesScore()));
+
     }
 }

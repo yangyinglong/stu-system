@@ -52,4 +52,6 @@ public interface IAdminService {
     Map<String,Object> showAllPrizeForTeacher(QueryRequ adminQueryRequ);
 
     Map<String,Object> showScoresForTeacher(QueryRequ queryRequ);
+
+    Map<String,Object> downStusForTeacher(QueryRequ queryRequ);
 }
