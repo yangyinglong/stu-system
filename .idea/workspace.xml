@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab7266a4-c91e-4b30-b3a2-f192191dfd0d" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/utils/ExcelUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/controller/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/service/IAdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/service/IAdminService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/service/impl/AdminServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/service/impl/AdminServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/service/impl/model/IAdminModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/service/impl/model/IAdminModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/service/impl/model/impl/AdminModelImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/service/impl/model/impl/AdminModelImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -22,66 +16,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="AdminController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/controller/AdminController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
-              <caret line="321" column="52" lean-forward="true" selection-start-line="321" selection-start-column="52" selection-end-line="321" selection-end-column="52" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IAdminService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/service/IAdminService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="443">
-              <caret line="55" column="22" selection-start-line="55" selection-start-column="4" selection-end-line="55" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="AdminServiceImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/service/impl/AdminServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="373">
-              <caret line="811" column="36" lean-forward="true" selection-start-line="811" selection-start-column="36" selection-end-line="811" selection-end-column="36" />
+            <state relative-caret-position="481">
+              <caret line="828" column="5" selection-start-line="817" selection-start-column="4" selection-end-line="828" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2178#2192#0" expanded="true" />
-                <element signature="e#4831#4845#0" expanded="true" />
-                <element signature="e#7489#7504#0" expanded="true" />
-                <element signature="e#10203#10223#0" expanded="true" />
-                <element signature="e#13074#13090#0" expanded="true" />
-                <element signature="e#15976#15992#0" expanded="true" />
-                <element signature="e#18805#18821#0" expanded="true" />
-                <element signature="e#21656#21673#0" expanded="true" />
-                <element signature="e#24552#24572#0" expanded="true" />
-                <element signature="e#27386#27399#0" expanded="true" />
-                <element signature="e#29933#29955#0" expanded="true" />
-                <element signature="e#31437#31461#0" expanded="true" />
-                <element signature="e#32556#32573#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FileController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/controller/FileController.java">
+      <file leaf-file-name="IInnovativeProMapper.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/dao/mapper/IInnovativeProMapper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="819">
-              <caret line="82" column="49" selection-start-line="82" selection-start-column="41" selection-end-line="82" selection-end-column="49" />
+            <state relative-caret-position="-1950">
+              <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DateUtil.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/utils/DateUtil.java">
+      <file leaf-file-name="FileController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/controller/FileController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="79">
-              <caret line="215" column="43" selection-start-line="215" selection-start-column="25" selection-end-line="215" selection-end-column="43" />
+            <state relative-caret-position="1950">
+              <caret line="97" column="48" selection-start-line="97" selection-start-column="48" selection-end-line="97" selection-end-column="48" />
             </state>
           </provider>
         </entry>
@@ -89,7 +49,7 @@
       <file leaf-file-name="IAdminModel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/service/impl/model/IAdminModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="98">
+            <state relative-caret-position="806">
               <caret line="33" column="9" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
             </state>
           </provider>
@@ -111,7 +71,7 @@
       <file leaf-file-name="AdminModelImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/service/impl/model/impl/AdminModelImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="14">
+            <state relative-caret-position="9776">
               <caret line="385" column="31" selection-start-line="385" selection-start-column="31" selection-end-line="385" selection-end-column="31" />
             </state>
           </provider>
@@ -129,8 +89,8 @@
       <file leaf-file-name="QueryRequ.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/model/request/QueryRequ.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="52">
-              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+            <state relative-caret-position="130">
+              <caret line="5" column="18" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="18" />
               <folding>
                 <element signature="e#268#269#0" expanded="true" />
                 <element signature="e#297#298#0" expanded="true" />
@@ -153,6 +113,24 @@
                 <element signature="e#907#908#0" expanded="true" />
                 <element signature="e#945#946#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EditAllScoreRequ.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/model/request/EditAllScoreRequ.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="52">
+              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EditEngiProRequ.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/model/request/EditEngiProRequ.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="52">
+              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -200,7 +178,6 @@
         <option value="$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/dao/mapper/ICompetitionMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/dao/mapper/IScoreAllMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/service/impl/UserServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/controller/FileController.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/hdu/config/MyBatisConfig.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/resources/application.properties" />
@@ -224,6 +201,7 @@
         <option value="$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/service/impl/model/impl/AdminModelImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/utils/ExcelUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/service/impl/AdminServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/controller/FileController.java" />
       </list>
     </option>
   </component>
@@ -244,9 +222,9 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="width" value="977" />
-    <option name="height" value="1038" />
+    <option name="x" value="-10" />
+    <option name="width" value="980" />
+    <option name="height" value="1040" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -254,6 +232,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="AndroidView" />
+      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -315,6 +295,48 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="hdu" type="462c0819:PsiDirectoryNode" />
               <item name="fragmentTax" type="462c0819:PsiDirectoryNode" />
+              <item name="dao" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="stu-system" type="b2602c69:ProjectViewProjectNode" />
+              <item name="stu_system" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="hdu" type="462c0819:PsiDirectoryNode" />
+              <item name="fragmentTax" type="462c0819:PsiDirectoryNode" />
+              <item name="dao" type="462c0819:PsiDirectoryNode" />
+              <item name="mapper" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="stu-system" type="b2602c69:ProjectViewProjectNode" />
+              <item name="stu_system" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="hdu" type="462c0819:PsiDirectoryNode" />
+              <item name="fragmentTax" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="stu-system" type="b2602c69:ProjectViewProjectNode" />
+              <item name="stu_system" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="hdu" type="462c0819:PsiDirectoryNode" />
+              <item name="fragmentTax" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+              <item name="request" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="stu-system" type="b2602c69:ProjectViewProjectNode" />
+              <item name="stu_system" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="hdu" type="462c0819:PsiDirectoryNode" />
+              <item name="fragmentTax" type="462c0819:PsiDirectoryNode" />
               <item name="service" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -352,6 +374,16 @@
               <item name="impl" type="462c0819:PsiDirectoryNode" />
               <item name="model" type="462c0819:PsiDirectoryNode" />
               <item name="impl" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="stu-system" type="b2602c69:ProjectViewProjectNode" />
+              <item name="stu_system" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="hdu" type="462c0819:PsiDirectoryNode" />
+              <item name="fragmentTax" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="stu-system" type="b2602c69:ProjectViewProjectNode" />
@@ -364,8 +396,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -585,7 +615,14 @@
       <option name="project" value="LOCAL" />
       <updated>1557374563926</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="学生基本信息Excel文件生成和下载">
+      <created>1557627623746</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1557627623746</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TodoView">
@@ -603,30 +640,30 @@
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32952926" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.13980028" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="3" weight="0.22855228" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.40798858" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26876676" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3281027" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28351206" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4422254" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.13980028" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3281027" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -645,7 +682,8 @@
     <MESSAGE value="最新版本" />
     <MESSAGE value="基本信息添加政治面貌等字段，硕士论文添加加送外审成绩字段" />
     <MESSAGE value="增加按姓名和学号的模糊查询功能" />
-    <option name="LAST_COMMIT_MESSAGE" value="增加按姓名和学号的模糊查询功能" />
+    <MESSAGE value="学生基本信息Excel文件生成和下载" />
+    <option name="LAST_COMMIT_MESSAGE" value="学生基本信息Excel文件生成和下载" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -706,7 +744,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/controller/FileController.java</url>
-          <line>52</line>
+          <line>53</line>
           <properties />
           <option name="timeStamp" value="65" />
         </line-breakpoint>
@@ -850,7 +888,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/controller/FileController.java</url>
-          <line>76</line>
+          <line>77</line>
           <properties />
           <option name="timeStamp" value="156" />
         </line-breakpoint>
@@ -877,27 +915,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/model/request/StuLoginRequ.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="52">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/hdu/config/BaseMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/common/FileStream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/controller/config/JerseyConfig.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="260">
@@ -1151,53 +1168,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/service/IAdminService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="443">
+        <state relative-caret-position="1326">
           <caret line="55" column="22" selection-start-line="55" selection-start-column="4" selection-end-line="55" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/controller/AdminController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="321" column="52" lean-forward="true" selection-start-line="321" selection-start-column="52" selection-end-line="321" selection-end-column="52" />
+        <state relative-caret-position="8060">
+          <caret line="321" column="52" selection-start-line="321" selection-start-column="52" selection-end-line="321" selection-end-column="52" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/model/request/QueryRequ.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="52">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-          <folding>
-            <element signature="e#268#269#0" expanded="true" />
-            <element signature="e#297#298#0" expanded="true" />
-            <element signature="e#341#342#0" expanded="true" />
-            <element signature="e#377#378#0" expanded="true" />
-            <element signature="e#410#411#0" expanded="true" />
-            <element signature="e#438#439#0" expanded="true" />
-            <element signature="e#481#482#0" expanded="true" />
-            <element signature="e#515#516#0" expanded="true" />
-            <element signature="e#550#551#0" expanded="true" />
-            <element signature="e#579#580#0" expanded="true" />
-            <element signature="e#625#626#0" expanded="true" />
-            <element signature="e#661#662#0" expanded="true" />
-            <element signature="e#693#694#0" expanded="true" />
-            <element signature="e#721#722#0" expanded="true" />
-            <element signature="e#763#764#0" expanded="true" />
-            <element signature="e#797#798#0" expanded="true" />
-            <element signature="e#831#832#0" expanded="true" />
-            <element signature="e#861#862#0" expanded="true" />
-            <element signature="e#907#908#0" expanded="true" />
-            <element signature="e#945#946#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/service/impl/model/IAdminModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="98">
+        <state relative-caret-position="806">
           <caret line="33" column="9" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
         </state>
       </provider>
@@ -1236,45 +1224,82 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/service/impl/model/impl/AdminModelImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="14">
+        <state relative-caret-position="9776">
           <caret line="385" column="31" selection-start-line="385" selection-start-column="31" selection-end-line="385" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/utils/DateUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="79">
+        <state relative-caret-position="-77">
           <caret line="215" column="43" selection-start-line="215" selection-start-column="25" selection-end-line="215" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/service/impl/AdminServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="811" column="36" lean-forward="true" selection-start-line="811" selection-start-column="36" selection-end-line="811" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2178#2192#0" expanded="true" />
-            <element signature="e#4831#4845#0" expanded="true" />
-            <element signature="e#7489#7504#0" expanded="true" />
-            <element signature="e#10203#10223#0" expanded="true" />
-            <element signature="e#13074#13090#0" expanded="true" />
-            <element signature="e#15976#15992#0" expanded="true" />
-            <element signature="e#18805#18821#0" expanded="true" />
-            <element signature="e#21656#21673#0" expanded="true" />
-            <element signature="e#24552#24572#0" expanded="true" />
-            <element signature="e#27386#27399#0" expanded="true" />
-            <element signature="e#29933#29955#0" expanded="true" />
-            <element signature="e#31437#31461#0" expanded="true" />
-            <element signature="e#32556#32573#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/controller/FileController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="819">
-          <caret line="82" column="49" selection-start-line="82" selection-start-column="41" selection-end-line="82" selection-end-column="49" />
+        <state relative-caret-position="1950">
+          <caret line="97" column="48" selection-start-line="97" selection-start-column="48" selection-end-line="97" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/model/request/QueryRequ.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="5" column="18" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="18" />
+          <folding>
+            <element signature="e#268#269#0" expanded="true" />
+            <element signature="e#297#298#0" expanded="true" />
+            <element signature="e#341#342#0" expanded="true" />
+            <element signature="e#377#378#0" expanded="true" />
+            <element signature="e#410#411#0" expanded="true" />
+            <element signature="e#438#439#0" expanded="true" />
+            <element signature="e#481#482#0" expanded="true" />
+            <element signature="e#515#516#0" expanded="true" />
+            <element signature="e#550#551#0" expanded="true" />
+            <element signature="e#579#580#0" expanded="true" />
+            <element signature="e#625#626#0" expanded="true" />
+            <element signature="e#661#662#0" expanded="true" />
+            <element signature="e#693#694#0" expanded="true" />
+            <element signature="e#721#722#0" expanded="true" />
+            <element signature="e#763#764#0" expanded="true" />
+            <element signature="e#797#798#0" expanded="true" />
+            <element signature="e#831#832#0" expanded="true" />
+            <element signature="e#861#862#0" expanded="true" />
+            <element signature="e#907#908#0" expanded="true" />
+            <element signature="e#945#946#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/model/request/EditAllScoreRequ.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="52">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/model/request/EditEngiProRequ.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="52">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/service/impl/AdminServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="481">
+          <caret line="828" column="5" selection-start-line="817" selection-start-column="4" selection-end-line="828" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/hdu/fragmentTax/dao/mapper/IInnovativeProMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1950">
+          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
         </state>
       </provider>
     </entry>
