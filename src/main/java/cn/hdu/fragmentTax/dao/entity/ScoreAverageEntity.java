@@ -27,11 +27,15 @@ public class ScoreAverageEntity implements Serializable {
     private String createdTime;
     @Column
     private String changedTiem;
+    @Column
+    private float weightedAverageScore;
+    @Column
+    private float hadCredit;
 
     public ScoreAverageEntity() {
     }
 
-    public ScoreAverageEntity(Integer id, String stuId, float averageScore, Integer currNumber, String languagesTypes, float languagesScore, Integer state, String createdTime, String changedTiem) {
+    public ScoreAverageEntity(Integer id, String stuId, float averageScore, Integer currNumber, String languagesTypes, float languagesScore, Integer state, String createdTime, String changedTiem, float weightedAverageScore, float hadCredit) {
         this.id = id;
         this.stuId = stuId;
         this.averageScore = averageScore;
@@ -41,6 +45,8 @@ public class ScoreAverageEntity implements Serializable {
         this.state = state;
         this.createdTime = createdTime;
         this.changedTiem = changedTiem;
+        this.weightedAverageScore = weightedAverageScore;
+        this.hadCredit = hadCredit;
     }
 
     public Integer getId() {
@@ -113,6 +119,22 @@ public class ScoreAverageEntity implements Serializable {
 
     public void setChangedTiem(String changedTiem) {
         this.changedTiem = changedTiem;
+    }
+
+    public float getWeightedAverageScore() {
+        return weightedAverageScore;
+    }
+
+    public void setWeightedAverageScore(float weightedAverageScore) {
+        this.weightedAverageScore = weightedAverageScore;
+    }
+
+    public float getHadCredit() {
+        return hadCredit;
+    }
+
+    public void setHadCredit(float hadCredit) {
+        this.hadCredit = hadCredit;
     }
 
 }

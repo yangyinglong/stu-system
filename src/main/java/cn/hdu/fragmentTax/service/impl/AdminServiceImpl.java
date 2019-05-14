@@ -781,6 +781,8 @@ public class AdminServiceImpl implements IAdminService {
             getAllScoreResp.setName(stuBaseEntity.getName());
             getAllScoreResp.setCurrNumber(scoreAverageEntity.getCurrNumber());
             getAllScoreResp.setAverageScore(scoreAverageEntity.getAverageScore());
+            getAllScoreResp.setWeightedAverageScore(scoreAverageEntity.getWeightedAverageScore());
+            getAllScoreResp.setHadCredit(scoreAverageEntity.getHadCredit());
             getAllScoreResps.add(getAllScoreResp);
         }
         resp.put("c", 200);

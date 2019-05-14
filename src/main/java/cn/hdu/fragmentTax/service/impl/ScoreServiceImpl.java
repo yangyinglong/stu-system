@@ -32,6 +32,8 @@ public class ScoreServiceImpl implements IScoreService {
     private ITutorsMapper tutorsMapper;
     @Autowired
     private ICounsellorsMapper counsellorsMapper;
+    @Autowired
+    private ICreditMapper creditMapper;
 
     @Autowired
     private IScoreModel scoreModel;
@@ -135,17 +137,23 @@ public class ScoreServiceImpl implements IScoreService {
         }
         GetAllScoreResp getAllScoreResp = scoreModel.createAllScoreResp(scoreAllEntity);
         // 比较平均成绩是否正确
-        Map<String, Object> score = ScoreAllEntity.getAverageScore(scoreAllEntity);
+        CreditEntity creditEntity = creditMapper.queryByKey(1);
+        Map<String, Object> score = ScoreAllEntity.getAverageScore(creditEntity, scoreAllEntity);
         ScoreAverageEntity scoreAverageEntity = scoreAverageMapper.queryByStuId(stuId);
-        if ((Float)score.get("averageScore") == scoreAverageEntity.getAverageScore()) {
+        if ((Float)score.get("averageScore") == scoreAverageEntity.getAverageScore() &&
+                (Float)score.get("creditScore") == scoreAverageEntity.getWeightedAverageScore()) {
             getAllScoreResp.setAverageScore(scoreAverageEntity.getAverageScore());
             getAllScoreResp.setCurrNumber(scoreAverageEntity.getCurrNumber());
+            getAllScoreResp.setWeightedAverageScore(scoreAverageEntity.getWeightedAverageScore());
+            getAllScoreResp.setHadCredit(scoreAverageEntity.getHadCredit());
             resp.put("c", 200);
             resp.put("r", getAllScoreResp);
         }else {
-            scoreAverageMapper.updateAverageScore(scoreAllEntity.getStuId(), (Float) score.get("averageScore"), (Integer) score.get("currNumber"));
+            scoreAverageMapper.updateAverageScore(scoreAllEntity.getStuId(), (Float) score.get("averageScore"), (Integer) score.get("currNumber"), (Float) score.get("creditScore"), (Float) score.get("credit"));
             getAllScoreResp.setCurrNumber((Integer) score.get("currNumber"));
             getAllScoreResp.setAverageScore((Float) score.get("averageScore"));
+            getAllScoreResp.setWeightedAverageScore((Float) score.get("creditScore"));
+            getAllScoreResp.setHadCredit((Float) score.get("credit"));
             resp.put("c", 200);
             resp.put("r", getAllScoreResp);
         }
@@ -156,10 +164,11 @@ public class ScoreServiceImpl implements IScoreService {
     public Map<String, Object> editAllScore(EditAllScoreRequ editAllScoreResp) {
         Map<String, Object> resp = new HashMap<>();
         ScoreAllEntity scoreAllEntity = scoreModel.createScoreAllEntity(editAllScoreResp);
+        CreditEntity creditEntity = creditMapper.queryByKey(1);
         // todo 做一个成绩判断是否是错误的改动
         try {
-            Map<String, Object> score = ScoreAllEntity.getAverageScore(scoreAllEntity);
-            scoreAverageMapper.updateAverageScore(scoreAllEntity.getStuId(), (Float) score.get("averageScore"), (Integer) score.get("currNumber"));
+            Map<String, Object> score = ScoreAllEntity.getAverageScore(creditEntity, scoreAllEntity);
+            scoreAverageMapper.updateAverageScore(scoreAllEntity.getStuId(), (Float) score.get("averageScore"), (Integer) score.get("currNumber"), (Float) score.get("creditScore"), (Float) score.get("credit"));
             scoreAllMapper.updateScore(scoreAllEntity);
             resp.put("c", 200);
             resp.put("r", "修改成功");

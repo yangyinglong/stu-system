@@ -2,7 +2,6 @@ package cn.hdu.fragmentTax.dao.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -72,78 +71,110 @@ public class ScoreAllEntity implements Serializable {
         this.xiandaililun = xiandaililun;
     }
 
-    public static Map<String, Object> getAverageScore(ScoreAllEntity scoreAllEntity) {
+    public static Map<String, Object> getAverageScore(CreditEntity creditEntity, ScoreAllEntity scoreAllEntity) {
         Map<String, Object> score = new HashMap<String, Object>();
         float allScores = 0;
         float averageScore = 0;
+        float creditScore = 0;
         int currNumber = 0;
+        float allCredit = 0;
 
         if (-1 != scoreAllEntity.getNami()) {
             allScores = allScores + scoreAllEntity.getNami();
+            creditScore = creditScore + creditEntity.getNami() * scoreAllEntity.getNami();
+            allCredit = allCredit + creditEntity.getNami();
             currNumber = currNumber + 1;
         }
 
         if (-1 != scoreAllEntity.getEngineeringMathematics()) {
             allScores = allScores + scoreAllEntity.getEngineeringMathematics();
+            creditScore = creditScore + creditEntity.getEngineeringMathematics() * scoreAllEntity.getEngineeringMathematics();
             currNumber = currNumber + 1;
+            allCredit = allCredit + creditEntity.getEngineeringMathematics();
         }
         if (-1 != scoreAllEntity.getFirstForeignLanguage()) {
             allScores = allScores + scoreAllEntity.getFirstForeignLanguage();
+            creditScore = creditScore + creditEntity.getFirstForeignLanguage() * scoreAllEntity.getFirstForeignLanguage();
             currNumber = currNumber + 1;
+            allCredit = allCredit + creditEntity.getFirstForeignLanguage();
         }
         if (-1 != scoreAllEntity.getCharacteristicSocialism()) {
             allScores = allScores + scoreAllEntity.getCharacteristicSocialism();
+            creditScore = creditScore + creditEntity.getCharacteristicSocialism() * scoreAllEntity.getFirstForeignLanguage();
             currNumber = currNumber + 1;
+            allCredit = allCredit + creditEntity.getCharacteristicSocialism();
         }
         if (-1 != scoreAllEntity.getNumericalAnalysis()) {
             allScores = allScores + scoreAllEntity.getNumericalAnalysis();
+            creditScore = creditScore + creditEntity.getNumericalAnalysis() * scoreAllEntity.getNumericalAnalysis();
             currNumber = currNumber + 1;
+            allCredit = allCredit + creditEntity.getNumericalAnalysis();
         }
         if (-1 != scoreAllEntity.getDianyingyantao()) {
             allScores = allScores + scoreAllEntity.getDianyingyantao();
+            creditScore = creditScore + creditEntity.getDianyingyantao() * scoreAllEntity.getDianyingyantao();
             currNumber = currNumber + 1;
+            allCredit = allCredit + creditEntity.getDianyingyantao();
         }
 
         if (-1 != scoreAllEntity.getJidianxue()) {
             allScores = allScores + scoreAllEntity.getJidianxue();
+            creditScore = creditScore + creditEntity.getJidianxue() * scoreAllEntity.getJidianxue();
             currNumber = currNumber + 1;
+            allCredit = allCredit + creditEntity.getJidianxue();
         }
 
         if (-1 != scoreAllEntity.getJisuanjichu()) {
             allScores = allScores + scoreAllEntity.getJisuanjichu();
+            creditScore = creditScore + creditEntity.getJisuanjichu() * scoreAllEntity.getJisuanjichu();
             currNumber = currNumber + 1;
+            allCredit = allCredit + creditEntity.getJisuanjichu();
         }
 
         if (-1 != scoreAllEntity.getJisuanyingyong()) {
             allScores = allScores + scoreAllEntity.getJisuanyingyong();
+            creditScore = creditScore + creditEntity.getJisuanyingyong() * scoreAllEntity.getJisuanyingyong();
             currNumber = currNumber + 1;
+            allCredit = allCredit + creditEntity.getJisuanyingyong();
         }
 
         if (-1 != scoreAllEntity.getJixiejiagong()) {
             allScores = allScores + scoreAllEntity.getJixiejiagong();
+            creditScore = creditScore + creditEntity.getJixiejiagong() * scoreAllEntity.getJixiejiagong();
             currNumber = currNumber + 1;
+            allCredit = allCredit + creditEntity.getJixiejiagong();
         }
 
         if (-1 != scoreAllEntity.getJixiejiaozuo()) {
             allScores = allScores + scoreAllEntity.getJixiejiaozuo();
+            creditScore = creditScore + creditEntity.getJixiejiaozuo() * scoreAllEntity.getJixiejiaozuo();
             currNumber = currNumber + 1;
+            allCredit = allCredit + creditEntity.getJixiejiaozuo();
         }
 
         if (-1 != scoreAllEntity.getJixiezhizao()) {
             allScores = allScores + scoreAllEntity.getJixiezhizao();
+            creditScore = creditScore + creditEntity.getJixiezhizao() * scoreAllEntity.getJixiezhizao();
             currNumber = currNumber + 1;
+            allCredit = allCredit + creditEntity.getJixiezhizao();
         }
 
         if (-1 != scoreAllEntity.getXiandaililun()) {
             allScores = allScores + scoreAllEntity.getXiandaililun();
+            creditScore = creditScore + creditEntity.getXiandaililun() * scoreAllEntity.getXiandaililun();
             currNumber = currNumber + 1;
+            allCredit = allCredit + creditEntity.getXiandaililun();
         }
         score.put("currNumber", currNumber);
+        score.put("credit", allCredit);
         if (currNumber == 0) {
             currNumber = 1;
+            allCredit = 1;
         }
         averageScore = allScores / currNumber;
+        creditScore = creditScore / allCredit;
         score.put("averageScore", averageScore);
+        score.put("creditScore", creditScore);
         return score;
     }
 

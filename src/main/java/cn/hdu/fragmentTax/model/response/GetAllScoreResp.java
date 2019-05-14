@@ -19,8 +19,18 @@ public class GetAllScoreResp {
     private float dianyingyantao;  // 典型企业制造案例研讨
     private float jisuanjichu;  // 计算流体力学基础
     private float xiandaililun;  // 现代控制理论
+    private float weightedAverageScore;
+    private float hadCredit;
 
     public GetAllScoreResp() {
+    }
+
+    public float getHadCredit() {
+        return hadCredit;
+    }
+
+    public void setHadCredit(float hadCredit) {
+        this.hadCredit = hadCredit;
     }
 
     public String getName() {
@@ -37,6 +47,14 @@ public class GetAllScoreResp {
 
     public void setStuId(String stuId) {
         this.stuId = stuId;
+    }
+
+    public float getWeightedAverageScore() {
+        return weightedAverageScore;
+    }
+
+    public void setWeightedAverageScore(float weightedAverageScore) {
+        this.weightedAverageScore = weightedAverageScore;
     }
 
     public GetAllScoreResp(Integer currNumber, Float averageScore, float engineeringMathematics, float firstForeignLanguage, float characteristicSocialism, float numericalAnalysis, float jixiejiaozuo, float jisuanyingyong, float jidianxue, float nami, float jixiejiagong, float jixiezhizao, float dianyingyantao, float jisuanjichu, float xiandaililun) {
