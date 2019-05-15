@@ -14,13 +14,13 @@ import java.text.ParseException;
 @Service
 public class PrizeModelImpl implements IPrizeModel {
     @Override
-    public HonorEntity createHonorEntity(EditHonorResp editHonorResp) {
+    public HonorEntity createHonorEntity(EditHonorResp editHonorResp) throws ParseException {
         HonorEntity honorEntity = new HonorEntity();
         honorEntity.setStuId(editHonorResp.getStuId());
         honorEntity.setHonorGrade(editHonorResp.getHonorGrade());
         honorEntity.setHonorLevel(editHonorResp.getHonorLevel());
         honorEntity.setHonorType(editHonorResp.getHonorType());
-        honorEntity.setCreatedTime(DateUtil.getCurrentDatetime());
+        honorEntity.setCreatedTime(DateUtil.getChinaDateTime(editHonorResp.getGetDate()).split(" ")[0]);
         honorEntity.setScore(0);
         honorEntity.setState(1);
         honorEntity.setProofMaterialId(editHonorResp.getProofMaterialId());
@@ -428,5 +428,32 @@ public class PrizeModelImpl implements IPrizeModel {
         getPrizeForTeacherResp.setPatentNum(String.valueOf(allPrizeEntity.getPatentNum())+"/"+String.valueOf(allStuNum));
         getPrizeForTeacherResp.setWorkNum(String.valueOf(allPrizeEntity.getWorkNum())+"/"+String.valueOf(allStuNum));
         return getPrizeForTeacherResp;
+    }
+
+    @Override
+    public ProjectsEntity createProjectEntity(EditProjectRequ editProjectRequ) throws ParseException {
+        ProjectsEntity projectsEntity = new ProjectsEntity();
+        BeanUtils.copyProperties(editProjectRequ, projectsEntity);
+        if ("创业项目".equals(editProjectRequ.getProClass())) {
+            projectsEntity.setProType(" ");
+        }
+        projectsEntity.setProTime(DateUtil.getChinaDateTime(editProjectRequ.getProTime()).split(" ")[0]);
+        projectsEntity.setScore(0);
+        projectsEntity.setState(1);
+        return projectsEntity;
+    }
+
+    @Override
+    public GetProjectResp createGetProjectResp(ProjectsEntity projectsEntity) {
+        GetProjectResp getProjectResp = new GetProjectResp();
+        BeanUtils.copyProperties(projectsEntity, getProjectResp);
+        if (projectsEntity.getState() == 1) {
+            getProjectResp.setState("待审核");
+        } else if (projectsEntity.getState() == 2) {
+            getProjectResp.setState("已通过");
+        } else {
+            getProjectResp.setState("已删除");
+        }
+        return getProjectResp;
     }
 }

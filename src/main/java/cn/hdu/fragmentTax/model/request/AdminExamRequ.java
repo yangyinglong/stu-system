@@ -14,6 +14,7 @@ public class AdminExamRequ {
         this.score = score;
     }
 
+
     public String getStuId() {
         return stuId;
     }

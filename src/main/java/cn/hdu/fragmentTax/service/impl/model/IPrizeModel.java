@@ -7,7 +7,7 @@ import cn.hdu.fragmentTax.model.response.*;
 import java.text.ParseException;
 
 public interface IPrizeModel {
-    HonorEntity createHonorEntity(EditHonorResp editHonorResp);
+    HonorEntity createHonorEntity(EditHonorResp editHonorResp) throws ParseException;
 
     GetHonorResp createGetHonorResp(HonorEntity honorEntity);
 
@@ -50,4 +50,8 @@ public interface IPrizeModel {
     GetMasterPaperResp createGetMasterPaperResp(MasterPaperEntity masterPaperEntity);
 
     GetPrizeForTeacherResp createGetPrizeResp(AllPrizeEntity allPrizeEntity, Integer allStuNum);
+
+    ProjectsEntity createProjectEntity(EditProjectRequ editProjectRequ) throws ParseException;
+
+    GetProjectResp createGetProjectResp(ProjectsEntity projectsEntity);
 }

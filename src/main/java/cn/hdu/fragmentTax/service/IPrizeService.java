@@ -67,4 +67,10 @@ public interface IPrizeService {
     Map<String,Object> deleWork(Integer id);
 
     Map<String,Object> deleMasterPaper(Integer id);
+
+    Map<String,Object> editProject(EditProjectRequ editProjectRequ);
+
+    Map<String,Object> getProjects(String stuId);
+
+    Map<String,Object> deleProject(Integer id);
 }

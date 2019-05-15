@@ -282,6 +282,22 @@ public class AdminController {
         return resp;
     }
 
+    @Path("/showProjectsForTeacher")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Map<String, Object> showProjectsForTeacher(QueryRequ queryRequ){
+        Map<String, Object> resp = adminService.showProjectsForTeacher(queryRequ);
+        return resp;
+    }
+
+    @Path("/examProject")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Map<String, Object> examProject(AdminExamRequ adminExamRequ){
+        Map<String, Object> resp = adminService.examProject(adminExamRequ);
+        return resp;
+    }
+
     /**
      * 管理员或者导师查看学生基本信息
      * @param queryRequ

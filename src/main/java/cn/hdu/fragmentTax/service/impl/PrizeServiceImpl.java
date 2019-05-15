@@ -55,15 +55,18 @@ public class PrizeServiceImpl implements IPrizeService {
     @Autowired
     private IStuBaseMapper stuBaseMapper;
 
+    @Autowired
+    private IProjectsMapper projectsMapper;
+
 
     @Override
     public Map<String, Object> editHonor(EditHonorResp editHonorResp) {
         Map<String, Object> resp = new HashMap<>();
-        HonorEntity honorEntity = prizeModel.createHonorEntity(editHonorResp);
         if (!FormatUtil.isEmpty(editHonorResp.getId())) {
             // 更新
-            honorEntity.setId(editHonorResp.getId());
             try {
+                HonorEntity honorEntity = prizeModel.createHonorEntity(editHonorResp);
+                honorEntity.setId(editHonorResp.getId());
                 honorMapper.update(honorEntity);
                 resp.put("c", 200);
                 resp.put("r", "修改成功");
@@ -74,6 +77,7 @@ public class PrizeServiceImpl implements IPrizeService {
         } else {
             // 插入
             try {
+                HonorEntity honorEntity = prizeModel.createHonorEntity(editHonorResp);
                 honorMapper.insert(honorEntity);
                 resp.put("c", 200);
                 resp.put("r", "插入成功");
@@ -650,6 +654,65 @@ public class PrizeServiceImpl implements IPrizeService {
         Map<String, Object> resp = new HashMap<>();
         try {
             masterPaperMapper.delete(id);
+            resp.put("c", 200);
+            resp.put("r", "删除成功");
+        } catch (Exception e) {
+            resp.put("c", 410);
+            resp.put("r", "删除失败");
+        }
+        return resp;
+    }
+
+    @Override
+    public Map<String, Object> editProject(EditProjectRequ editProjectRequ) {
+        Map<String, Object> resp = new HashMap<>();
+        if (!FormatUtil.isEmpty(editProjectRequ.getId())) {
+            // 更新
+
+            try {
+                ProjectsEntity projectsEntity = prizeModel.createProjectEntity(editProjectRequ);
+                projectsEntity.setId(editProjectRequ.getId());
+                projectsMapper.update(projectsEntity);
+                resp.put("c", 200);
+                resp.put("r", "修改成功");
+            } catch (Exception e) {
+                resp.put("c", 401);
+                resp.put("r", "数据库错误");
+            }
+        } else {
+            // 插入
+            try {
+                ProjectsEntity projectsEntity = prizeModel.createProjectEntity(editProjectRequ);
+                projectsMapper.insert(projectsEntity);
+                resp.put("c", 200);
+                resp.put("r", "插入成功");
+            } catch (Exception e) {
+                resp.put("c", 401);
+                resp.put("r", "数据库错误");
+            }
+        }
+        return resp;
+    }
+
+    @Override
+    public Map<String, Object> getProjects(String stuId) {
+        Map<String, Object> resp = new HashMap<>();
+        List<ProjectsEntity> projectsEntities = projectsMapper.queryStuId(stuId);
+        List<GetProjectResp> getProjectResps = new ArrayList<GetProjectResp>();
+        for (ProjectsEntity projectsEntity : projectsEntities) {
+            GetProjectResp getProjectResp =  prizeModel.createGetProjectResp(projectsEntity);
+            getProjectResps.add(getProjectResp);
+        }
+        resp.put("c", 200);
+        resp.put("r", getProjectResps);
+        return resp;
+    }
+
+    @Override
+    public Map<String, Object> deleProject(Integer id) {
+        Map<String, Object> resp = new HashMap<>();
+        try {
+            projectsMapper.delete(id);
             resp.put("c", 200);
             resp.put("r", "删除成功");
         } catch (Exception e) {

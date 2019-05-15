@@ -79,6 +79,9 @@ public class AdminServiceImpl implements IAdminService {
     @Autowired
     private IScoreAverageMapper scoreAverageMapper;
 
+    @Autowired
+    private IProjectsMapper projectsMapper;
+
     @Override
     public Map<String, Object> showHonorsForTeacher(QueryRequ queryRequ) {
         Map<String, Object> resp = new HashMap<>();
@@ -814,6 +817,71 @@ public class AdminServiceImpl implements IAdminService {
             resp.put("r", "文件创建错误");
         }
         return resp;
+    }
+
+    @Override
+    public Map<String, Object> showProjectsForTeacher(QueryRequ queryRequ) {
+        Map<String, Object> resp = new HashMap<>();
+        String status = FormatUtil.strings2String(getIntAuditStatus(queryRequ.getStatus()));
+        List<ProjectsEntity> projectsEntities = null;
+        List<GetProjectResp> getProjectResps = new LinkedList<GetProjectResp>();
+        List<StuBaseEntity> stuBaseEntities = null;
+        if (queryRequ.getState() == 1) {
+//            辅导员查询
+            stuBaseEntities = stuBaseMapper.queryForCouner(queryRequ.getStuId(), queryRequ.getStuName());
+
+        } else {
+//            导师查询
+            stuBaseEntities = stuBaseMapper.queryByTutorId(queryRequ.getUserId());
+        }
+        String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
+        if (stuIds.equals("")){
+            resp.put("c", 200);
+            resp.put("r", getProjectResps);
+            return resp;
+        }
+        projectsEntities = projectsMapper.queryForTutor(status, stuIds);
+        for (ProjectsEntity projectsEntity : projectsEntities) {
+            StuBaseEntity stuBaseEntity = stuBaseMapper.queryByStuId(projectsEntity.getStuId());
+            if (FormatUtil.isEmpty(stuBaseEntity)) {
+                continue;
+            }
+            GetProjectResp getProjectResp = adminModel.createGetProjectResp(projectsEntity, stuBaseEntity);
+            getProjectResps.add(getProjectResp);
+        }
+        resp.put("c", 200);
+        resp.put("r", getProjectResps);
+        return resp;
+    }
+
+    @Override
+    public Map<String, Object> examProject(AdminExamRequ adminExamRequ) {
+        Map<String, Object> resp = new HashMap<>();
+        try {
+//            masterPaperMapper.updateScore(adminExamRequ.getId(), adminExamRequ.getScore(), 2);
+            projectsMapper.updateScore(adminExamRequ.getId(), adminExamRequ.getScore(), 2);
+            // 更新分数
+            Float allMasterPaperScore = 0.0f;
+            List<ProjectsEntity> projectsEntities = projectsMapper.queryByStuId(adminExamRequ.getStuId(), 2);
+            for (ProjectsEntity projectsEntity : projectsEntities) {
+                allMasterPaperScore = allMasterPaperScore + projectsEntity.getScore();
+            }
+            allPrizeMapper.updateEngiProScore(adminExamRequ.getStuId(), allMasterPaperScore);
+            // 更新排名
+            Integer order = 1;
+            List<AllPrizeEntity> allPrizeEntities = allPrizeMapper.orderByEngiPro();
+            for (AllPrizeEntity allPrizeEntity : allPrizeEntities) {
+                allPrizeMapper.updateEngiProNum(allPrizeEntity.getId(), order);
+                order = order + 1;
+            }
+            resp.put("c", 200);
+            resp.put("r", "审核成功");
+        } catch (Exception e) {
+            resp.put("c", 401);
+            resp.put("r", "数据库错误");
+        }
+
+        return  resp;
     }
 
 

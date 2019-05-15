@@ -32,4 +32,6 @@ public interface IAdminModel {
     GetAllScoreResp createGetAllScoreResp(ScoreAllEntity scoreAllEntity);
 
     void writeStuBaseInfoIntoExcel(Workbook workbook, GetStuForTeacherResp getStuForTeacherResp, int index);
+
+    GetProjectResp createGetProjectResp(ProjectsEntity projectsEntity, StuBaseEntity stuBaseEntity);
 }

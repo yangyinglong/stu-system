@@ -6,6 +6,7 @@ import cn.hdu.fragmentTax.model.response.*;
 import cn.hdu.fragmentTax.service.impl.model.IAdminModel;
 import cn.hdu.fragmentTax.utils.ExcelUtil;
 import cn.hdu.fragmentTax.utils.FormatUtil;
+import org.apache.commons.collections4.Get;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -408,5 +409,20 @@ public class AdminModelImpl implements IAdminModel {
         ExcelUtil.write(workbook, 0, index, 21, String.valueOf(getStuForTeacherResp.getLanguagesTypes()));
         ExcelUtil.write(workbook, 0, index, 22, String.valueOf(getStuForTeacherResp.getLanguagesScore()));
 
+    }
+
+    @Override
+    public GetProjectResp createGetProjectResp(ProjectsEntity projectsEntity, StuBaseEntity stuBaseEntity) {
+        GetProjectResp getProjectResp = new GetProjectResp();
+        BeanUtils.copyProperties(projectsEntity, getProjectResp);
+        if (projectsEntity.getState() == 1) {
+            getProjectResp.setState("待审核");
+        } else if (projectsEntity.getState() == 2) {
+            getProjectResp.setState("已通过");
+        } else {
+            getProjectResp.setState("已删除");
+        }
+        getProjectResp.setName(stuBaseEntity.getName());
+        return getProjectResp;
     }
 }

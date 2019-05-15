@@ -54,4 +54,8 @@ public interface IAdminService {
     Map<String,Object> showScoresForTeacher(QueryRequ queryRequ);
 
     Map<String,Object> downStusForTeacher(QueryRequ queryRequ);
+
+    Map<String,Object> showProjectsForTeacher(QueryRequ queryRequ);
+
+    Map<String,Object> examProject(AdminExamRequ adminExamRequ);
 }

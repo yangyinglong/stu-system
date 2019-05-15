@@ -376,4 +376,29 @@ public class PrizeController {
         return resp;
     }
 
+    @Path("/editProject")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Map<String, Object> editProject(EditProjectRequ editProjectRequ){
+        Map<String, Object> resp = prizeService.editProject(editProjectRequ);
+        return resp;
+    }
+
+    @Path("/getProjects")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Map<String, Object> getProjects(String stuId){
+        Map<String, Object> resp = prizeService.getProjects(stuId);
+        return resp;
+    }
+
+    @Path("/deleProject")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Map<String, Object> deleProject(Integer id){
+        Map<String, Object> resp = prizeService.deleProject(id);
+        return resp;
+    }
+
+
 }
