@@ -3,13 +3,43 @@ package cn.hdu.fragmentTax.model.request;
 public class EditWorkRequ {
     private Integer id;
     private String stuId;
-    private String companyName;
-    private String companyType;
     private String workType;
+    private String companyName;
+    private String isCmp;
+    private String companyType;
+    private String workClass;
+    private String address;
     private String getDate;
     private String proofMaterialId;
 
+
+
+
     public EditWorkRequ() {
+    }
+
+    public String getIsCmp() {
+        return isCmp;
+    }
+
+    public void setIsCmp(String isCmp) {
+        this.isCmp = isCmp;
+    }
+
+    public String getWorkClass() {
+        return workClass;
+    }
+
+    public void setWorkClass(String workClass) {
+        this.workClass = workClass;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public EditWorkRequ(Integer id, String stuId, String companyName, String companyType, String workType, String getDate, String proofMaterialId) {

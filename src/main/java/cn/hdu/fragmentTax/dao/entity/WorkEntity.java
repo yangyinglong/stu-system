@@ -14,30 +14,42 @@ public class WorkEntity implements Serializable {
     @Column
     private String stuId;
     @Column
+    private String workType;
+    @Column
     private String companyName;
+    @Column
+    private String isCmp;
     @Column
     private String companyType;
     @Column
-    private String workType;
+    private String workClass;
+    @Column
+    private String address;
     @Column
     private float score;
     @Column
     private Integer state;
     @Column
     private String createdTime;
+    @Column
+    private String proofMaterialId;
 
     public WorkEntity() {
     }
 
-    public WorkEntity(Integer id, String stuId, String companyName, String companyType, String workType, float score, Integer state, String createdTime) {
+    public WorkEntity(Integer id, String stuId, String workType, String companyName, String isCmp, String companyType, String workClass, String address, float score, Integer state, String createdTime, String proofMaterialId) {
         this.id = id;
         this.stuId = stuId;
-        this.companyName = companyName;
-        this.companyType = companyType;
         this.workType = workType;
+        this.companyName = companyName;
+        this.isCmp = isCmp;
+        this.companyType = companyType;
+        this.workClass = workClass;
+        this.address = address;
         this.score = score;
         this.state = state;
         this.createdTime = createdTime;
+        this.proofMaterialId = proofMaterialId;
     }
 
     public Integer getId() {
@@ -56,12 +68,28 @@ public class WorkEntity implements Serializable {
         this.stuId = stuId;
     }
 
+    public String getWorkType() {
+        return workType;
+    }
+
+    public void setWorkType(String workType) {
+        this.workType = workType;
+    }
+
     public String getCompanyName() {
         return companyName;
     }
 
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
+    }
+
+    public String getIsCmp() {
+        return isCmp;
+    }
+
+    public void setIsCmp(String isCmp) {
+        this.isCmp = isCmp;
     }
 
     public String getCompanyType() {
@@ -72,12 +100,20 @@ public class WorkEntity implements Serializable {
         this.companyType = companyType;
     }
 
-    public String getWorkType() {
-        return workType;
+    public String getWorkClass() {
+        return workClass;
     }
 
-    public void setWorkType(String workType) {
-        this.workType = workType;
+    public void setWorkClass(String workClass) {
+        this.workClass = workClass;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public float getScore() {
@@ -102,6 +138,14 @@ public class WorkEntity implements Serializable {
 
     public void setCreatedTime(String createdTime) {
         this.createdTime = createdTime;
+    }
+
+    public String getProofMaterialId() {
+        return proofMaterialId;
+    }
+
+    public void setProofMaterialId(String proofMaterialId) {
+        this.proofMaterialId = proofMaterialId;
     }
 
 }
