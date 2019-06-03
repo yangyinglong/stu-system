@@ -93,7 +93,7 @@ public interface ICompetitionMapper {
     })
     List<CompetitionEntity> queryForAdmin(@Param("state") String status);
 
-    @Select("SELECT `id`, `stu_id`, `competition_type`, `competition_name`, `ranking`, `total_number`, `competition_state`, `competition_prize`, `competition_level`, `teacher`, `proof_material_id`, `score`, `state`, `created_time` FROM `competition` where `state` in (${state}) and `stu_id` in (${stuIds})")
+    @Select("SELECT `id`, `stu_id`, `competition_type`, `competition_name`, `ranking`, `total_number`, `competition_state`, `competition_prize`, `competition_level`, `teacher`, `proof_material_id`, `score`, `state`, `created_time` FROM `competition` where `state` in (${state}) and `stu_id` in (${stuIds}) and `competition_type` like #{competitionType} and `competition_level` like #{competitionLevel}")
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "stuId", column = "stu_id"),
@@ -110,7 +110,7 @@ public interface ICompetitionMapper {
             @Result(property = "state", column = "state"),
             @Result(property = "createdTime", column = "created_time")
     })
-    List<CompetitionEntity> queryForTutor(@Param("state") String status, @Param("stuIds") String stuIds);
+    List<CompetitionEntity> queryForTutor(@Param("state") String status, @Param("stuIds") String stuIds, @Param("competitionType") String competitionType, @Param("competitionLevel") String competitionLevel);
 
     @Update("UPDATE `competition` SET score=#{score}, state=#{state} WHERE `id` = #{id}")
     void updateScore(@Param("id") String id, @Param("score") Float score, @Param("state") Integer state);

@@ -103,7 +103,7 @@ public class AdminServiceImpl implements IAdminService {
             resp.put("r", getHonorResps);
             return resp;
         }
-        honorEntities = honorMapper.queryForTutor(status, stuIds);
+        honorEntities = honorMapper.queryForTutor(status, stuIds, queryRequ.getHonorType());
         for (HonorEntity honorEntity : honorEntities) {
             StuBaseEntity stuBaseEntity = stuBaseMapper.queryByStuId(honorEntity.getStuId());
             if (FormatUtil.isEmpty(stuBaseEntity)) {
@@ -166,7 +166,7 @@ public class AdminServiceImpl implements IAdminService {
             resp.put("r", getPaperResps);
             return resp;
         }
-        paperEntities = paperMapper.queryForTutor(status, stuIds);
+        paperEntities = paperMapper.queryForTutor(status, stuIds, queryRequ.getPaperGrade());
         for (PaperEntity paperEntity : paperEntities) {
             StuBaseEntity stuBaseEntity = stuBaseMapper.queryByStuId(paperEntity.getStuId());
             if (FormatUtil.isEmpty(stuBaseEntity)) {
@@ -229,7 +229,7 @@ public class AdminServiceImpl implements IAdminService {
             resp.put("r", getPatentResps);
             return resp;
         }
-        patentEntities = patentMapper.queryForTutor(status, stuIds);
+        patentEntities = patentMapper.queryForTutor(status, stuIds, queryRequ.getPatentType(), queryRequ.getPatentState());
         for (PatentEntity patentEntity : patentEntities) {
             StuBaseEntity stuBaseEntity = stuBaseMapper.queryByStuId(patentEntity.getStuId());
             if (FormatUtil.isEmpty(stuBaseEntity)) {
@@ -292,7 +292,7 @@ public class AdminServiceImpl implements IAdminService {
             resp.put("r", getCompetitionResps);
             return resp;
         }
-        competitionEntities = competitionMapper.queryForTutor(status, stuIds);
+        competitionEntities = competitionMapper.queryForTutor(status, stuIds, queryRequ.getCompetitionType(), queryRequ.getCompetitionLevel());
         for (CompetitionEntity competitionEntity : competitionEntities) {
             StuBaseEntity stuBaseEntity = stuBaseMapper.queryByStuId(competitionEntity.getStuId());
             if (FormatUtil.isEmpty(stuBaseEntity)) {
@@ -544,7 +544,7 @@ public class AdminServiceImpl implements IAdminService {
             resp.put("r", getAcadExchResps);
             return resp;
         }
-        academicExchangeEntities = academicExchangeMapper.queryForTutor(status, stuIds);
+        academicExchangeEntities = academicExchangeMapper.queryForTutor(status, stuIds, queryRequ.getExchangeType());
         for (AcademicExchangeEntity academicExchangeEntity : academicExchangeEntities) {
             StuBaseEntity stuBaseEntity = stuBaseMapper.queryByStuId(academicExchangeEntity.getStuId());
             if (FormatUtil.isEmpty(stuBaseEntity)) {
@@ -670,7 +670,7 @@ public class AdminServiceImpl implements IAdminService {
             resp.put("r", getWorkResps);
             return resp;
         }
-        workEntities = workMapper.queryForTutor(status, stuIds);
+        workEntities = workMapper.queryForTutor(status, stuIds, queryRequ.getWorkType());
         for (WorkEntity workEntity : workEntities) {
             StuBaseEntity stuBaseEntity = stuBaseMapper.queryByStuId(workEntity.getStuId());
             if (FormatUtil.isEmpty(stuBaseEntity)) {
@@ -840,7 +840,7 @@ public class AdminServiceImpl implements IAdminService {
             resp.put("r", getProjectResps);
             return resp;
         }
-        projectsEntities = projectsMapper.queryForTutor(status, stuIds);
+        projectsEntities = projectsMapper.queryForTutor(status, stuIds, queryRequ.getProClass(), queryRequ.getProType());
         for (ProjectsEntity projectsEntity : projectsEntities) {
             StuBaseEntity stuBaseEntity = stuBaseMapper.queryByStuId(projectsEntity.getStuId());
             if (FormatUtil.isEmpty(stuBaseEntity)) {

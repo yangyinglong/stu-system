@@ -86,7 +86,7 @@ public interface IWorkMapper {
     List<WorkEntity> queryForAdmin(@Param("states") String status);
 
 
-    @Select("SELECT `id`, `stu_id`, `work_type`, `company_name`, `is_cmp`, `company_type`, `work_class`, `address`, `score`, `state`, `created_time`, `proof_material_id` FROM `work` WHERE `state` in (${states}) and `stu_id` in (${stuIds})")
+    @Select("SELECT `id`, `stu_id`, `work_type`, `company_name`, `is_cmp`, `company_type`, `work_class`, `address`, `score`, `state`, `created_time`, `proof_material_id` FROM `work` WHERE `state` in (${states}) and `stu_id` in (${stuIds}) and `work_type` like #{workType}")
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "stuId", column = "stu_id"),
@@ -101,7 +101,7 @@ public interface IWorkMapper {
             @Result(property = "createdTime", column = "created_time"),
             @Result(property = "proofMaterialId", column = "proof_material_id")
     })
-    List<WorkEntity> queryForTutor(@Param("states") String status, @Param("stuIds") String stuIds);
+    List<WorkEntity> queryForTutor(@Param("states") String status, @Param("stuIds") String stuIds, @Param("workType") String workType);
 
     @Update("UPDATE `work` SET score=#{score}, state=#{state} WHERE `id` = #{id}")
     void updateScore(@Param("id") String id, @Param("score") Float score, @Param("state") Integer state);

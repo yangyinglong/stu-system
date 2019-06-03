@@ -35,7 +35,7 @@ public class PrizeModelImpl implements IPrizeModel {
         getHonorResp.setScore(honorEntity.getScore());
         getHonorResp.setProofMaterialId(honorEntity.getProofMaterialId());
         if (honorEntity.getHonorType() == 1) {
-            getHonorResp.setHonorType("本科生奖学金");
+            getHonorResp.setHonorType("国家奖学金");
         } else if (honorEntity.getHonorType() == 2) {
             getHonorResp.setHonorType("研究生奖学金");
         } else if (honorEntity.getHonorType() == 3) {

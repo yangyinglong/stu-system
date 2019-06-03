@@ -96,7 +96,7 @@ public interface IHonorMapper {
     List<HonorEntity> queryByStuId(@Param("stuId") String stuId, @Param("state") Integer state);
 
 
-    @Select("SELECT `id`, `stu_id`, `honor_type`, `honor_level`, `honor_grade`, `proof_material_id`, `score`, `state`, `created_time`, `changed_time` FROM `honor` where `state` in (${state}) and `stu_id` in (${stuIds})")
+    @Select("SELECT `id`, `stu_id`, `honor_type`, `honor_level`, `honor_grade`, `proof_material_id`, `score`, `state`, `created_time`, `changed_time` FROM `honor` where `state` in (${state}) and `stu_id` in (${stuIds}) and `honor_type` like #{honorType}")
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "stuId", column = "stu_id"),
@@ -109,5 +109,5 @@ public interface IHonorMapper {
             @Result(property = "createdTime", column = "created_time"),
             @Result(property = "changedTime", column = "changed_time")
     })
-    List<HonorEntity> queryForTutor(@Param("state") String status, @Param("stuIds") String stuIds);
+    List<HonorEntity> queryForTutor(@Param("state") String status, @Param("stuIds") String stuIds,  @Param("honorType") String honorType);
 }

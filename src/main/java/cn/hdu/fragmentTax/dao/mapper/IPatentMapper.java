@@ -85,7 +85,7 @@ public interface IPatentMapper {
     })
     List<PatentEntity> queryForAdmin(@Param("state") String status);
 
-    @Select("SELECT `id`, `stu_id`, `patent_type`, `patent_name`, `patent_state`, `proof_material_id`, `ranking`, `total_number`, `score`, `state`, `created_time`, `changed_time` FROM `patent` where `state` in (${state}) and `stu_id` in (${stuIds})")
+    @Select("SELECT `id`, `stu_id`, `patent_type`, `patent_name`, `patent_state`, `proof_material_id`, `ranking`, `total_number`, `score`, `state`, `created_time`, `changed_time` FROM `patent` where `state` in (${state}) and `stu_id` in (${stuIds}) and `patent_type` like #{patentType} and `patent_state` like #{patentState}")
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "stuId", column = "stu_id"),
@@ -100,7 +100,7 @@ public interface IPatentMapper {
             @Result(property = "createdTime", column = "created_time"),
             @Result(property = "changedTime", column = "changed_time")
     })
-    List<PatentEntity> queryForTutor(@Param("state") String status, @Param("stuIds") String stuIds);
+    List<PatentEntity> queryForTutor(@Param("state") String status, @Param("stuIds") String stuIds, @Param("patentType") String patentType, @Param("patentState") String patentState);
 
     @Update("UPDATE `patent` SET score=#{score}, state=#{state} WHERE `id` = #{id}")
     void updateScore(@Param("id") String id, @Param("score") Float score, @Param("state") Integer state);

@@ -77,7 +77,7 @@ public interface IProjectsMapper {
     })
     List<ProjectsEntity> queryStuId(@Param("stuId") String stuId);
 
-    @Select("SELECT `id`, `stu_id`, `pro_name`, `pro_type`, `pro_level`, `ranking`, `total_number`, `pro_time`, `pro_teacher`, `pro_result`, `score`, `pro_class`, `proof_material_id`, `pro_state`, `state` FROM `projects` WHERE `stu_id` in (${stuIds}) and `state` in (${states})")
+    @Select("SELECT `id`, `stu_id`, `pro_name`, `pro_type`, `pro_level`, `ranking`, `total_number`, `pro_time`, `pro_teacher`, `pro_result`, `score`, `pro_class`, `proof_material_id`, `pro_state`, `state` FROM `projects` WHERE `stu_id` in (${stuIds}) and `state` in (${states}) and `pro_class` like #{proClass} and `pro_type` like #{proType}")
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "stuId", column = "stu_id"),
@@ -95,7 +95,7 @@ public interface IProjectsMapper {
             @Result(property = "proState", column = "pro_state"),
             @Result(property = "state", column = "state")
     })
-    List<ProjectsEntity> queryForTutor(@Param("states") String status, @Param("stuIds") String stuIds);
+    List<ProjectsEntity> queryForTutor(@Param("states") String status, @Param("stuIds") String stuIds, @Param("proClass") String proClass, @Param("proType") String proType);
 
     @Update("UPDATE `projects` SET score=#{score}, state=#{state} WHERE `id` = #{id}")
     void updateScore(@Param("id") String id, @Param("score") Float score, @Param("state") Integer state);
