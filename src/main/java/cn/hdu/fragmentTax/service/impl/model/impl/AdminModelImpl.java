@@ -425,4 +425,134 @@ public class AdminModelImpl implements IAdminModel {
         getProjectResp.setName(stuBaseEntity.getName());
         return getProjectResp;
     }
+
+    @Override
+    public void writeHonorIntoExcel(Workbook workbook, GetHonorResp getHonorResp, int index) {
+        ExcelUtil.write(workbook, 0, index, 0, getHonorResp.getStuId());
+        ExcelUtil.write(workbook, 0, index, 1, getHonorResp.getName());
+        ExcelUtil.write(workbook, 0, index, 2, getHonorResp.getHonorType());
+        ExcelUtil.write(workbook, 0, index, 3, getHonorResp.getHonorLevel());
+        ExcelUtil.write(workbook, 0, index, 4, getHonorResp.getHonorGrade());
+        ExcelUtil.write(workbook, 0, index, 5, getHonorResp.getGetDate());
+        ExcelUtil.write(workbook, 0, index, 6, Float.toString(getHonorResp.getScore()));
+        ExcelUtil.write(workbook, 0, index, 7, getHonorResp.getStatus());
+    }
+
+    @Override
+    public void writePaperIntoExcel(Workbook workbook, GetPaperResp getPaperResp, int index) {
+        ExcelUtil.write(workbook, 0, index, 0, getPaperResp.getStuId());
+        ExcelUtil.write(workbook, 0, index, 1, getPaperResp.getName());
+        ExcelUtil.write(workbook, 0, index, 2, getPaperResp.getPaperTitle());
+        ExcelUtil.write(workbook, 0, index, 3, getPaperResp.getPaperGrade());
+        ExcelUtil.write(workbook, 0, index, 4, getPaperResp.getJournalTitle());
+        ExcelUtil.write(workbook, 0, index, 5, Integer.toString(getPaperResp.getRanking()));
+        ExcelUtil.write(workbook, 0, index, 6, Integer.toString(getPaperResp.getTotalNumber()));
+        ExcelUtil.write(workbook, 0, index, 7, getPaperResp.getPaperState());
+        ExcelUtil.write(workbook, 0, index, 8, getPaperResp.getGetDate());
+        ExcelUtil.write(workbook, 0, index, 9, Float.toString(getPaperResp.getScore()));
+        ExcelUtil.write(workbook, 0, index, 10, getPaperResp.getStatus());
+    }
+
+    @Override
+    public void writePatentIntoExcel(Workbook workbook, GetPatentResp getPatentResp, int index) {
+        ExcelUtil.write(workbook, 0, index, 0, getPatentResp.getStuId());
+        ExcelUtil.write(workbook, 0, index, 1, getPatentResp.getName());
+        ExcelUtil.write(workbook, 0, index, 2, getPatentResp.getPatentName());
+        ExcelUtil.write(workbook, 0, index, 3, getPatentResp.getPatentType());
+//        ExcelUtil.write(workbook, 0, index, 4, getPatentResp.getJournalTitle());
+        ExcelUtil.write(workbook, 0, index, 4, Integer.toString(getPatentResp.getRanking()));
+        ExcelUtil.write(workbook, 0, index, 5, Integer.toString(getPatentResp.getTotalNumber()));
+        ExcelUtil.write(workbook, 0, index, 6, getPatentResp.getPatentState());
+        ExcelUtil.write(workbook, 0, index, 7, getPatentResp.getGetDate());
+        ExcelUtil.write(workbook, 0, index, 8, Float.toString(getPatentResp.getScore()));
+        ExcelUtil.write(workbook, 0, index, 9, getPatentResp.getStatus());
+    }
+
+    @Override
+    public void writeCompetitionIntoExcel(Workbook workbook, GetCompetitionResp getCompetitionResp, int index) {
+        ExcelUtil.write(workbook, 0, index, 0, getCompetitionResp.getStuId());
+        ExcelUtil.write(workbook, 0, index, 1, getCompetitionResp.getName());
+        ExcelUtil.write(workbook, 0, index, 2, getCompetitionResp.getCompetitionType());
+        ExcelUtil.write(workbook, 0, index, 3, getCompetitionResp.getCompetitionName());
+        ExcelUtil.write(workbook, 0, index, 4, getCompetitionResp.getCompetitionState());
+        ExcelUtil.write(workbook, 0, index, 5, getCompetitionResp.getCompetitionLevel());
+        ExcelUtil.write(workbook, 0, index, 6, getCompetitionResp.getCompetitionPrize());
+
+        ExcelUtil.write(workbook, 0, index, 7, Integer.toString(getCompetitionResp.getRanking()));
+        ExcelUtil.write(workbook, 0, index, 8, Integer.toString(getCompetitionResp.getTotalNumber()));
+        ExcelUtil.write(workbook, 0, index, 9, getCompetitionResp.getTeacher());
+        ExcelUtil.write(workbook, 0, index, 10, getCompetitionResp.getGetDate());
+        ExcelUtil.write(workbook, 0, index, 11, Float.toString(getCompetitionResp.getScore()));
+        ExcelUtil.write(workbook, 0, index, 12, getCompetitionResp.getStatus());
+    }
+
+    @Override
+    public void writeProjectIntoExcel(Workbook workbook, GetProjectResp getProjectResp, int index) {
+        ExcelUtil.write(workbook, 0, index, 0, getProjectResp.getStuId());
+        ExcelUtil.write(workbook, 0, index, 1, getProjectResp.getName());
+        ExcelUtil.write(workbook, 0, index, 2, getProjectResp.getProClass());
+        ExcelUtil.write(workbook, 0, index, 3, getProjectResp.getProType());
+        ExcelUtil.write(workbook, 0, index, 4, getProjectResp.getProName());
+        ExcelUtil.write(workbook, 0, index, 5, getProjectResp.getProLevel());
+        ExcelUtil.write(workbook, 0, index, 6, getProjectResp.getProState());
+
+        ExcelUtil.write(workbook, 0, index, 7, Integer.toString(getProjectResp.getRanking()));
+        ExcelUtil.write(workbook, 0, index, 8, Integer.toString(getProjectResp.getTotalNumber()));
+        ExcelUtil.write(workbook, 0, index, 9, getProjectResp.getProTeacher());
+        ExcelUtil.write(workbook, 0, index, 10, getProjectResp.getProTime());
+        ExcelUtil.write(workbook, 0, index, 11, getProjectResp.getProResult());
+        ExcelUtil.write(workbook, 0, index, 12, Float.toString(getProjectResp.getScore()));
+        ExcelUtil.write(workbook, 0, index, 13, getProjectResp.getState());
+    }
+
+    @Override
+    public void writeAcadExchExcel(Workbook workbook, GetAcadExchResp getAcadExchResp, int index) {
+        ExcelUtil.write(workbook, 0, index, 0, getAcadExchResp.getStuId());
+        ExcelUtil.write(workbook, 0, index, 1, getAcadExchResp.getName());
+        ExcelUtil.write(workbook, 0, index, 2, getAcadExchResp.getExchangeType());
+        ExcelUtil.write(workbook, 0, index, 3, getAcadExchResp.getConferenceName());
+        ExcelUtil.write(workbook, 0, index, 4, getAcadExchResp.getStartTime());
+        ExcelUtil.write(workbook, 0, index, 5, getAcadExchResp.getEndTime());
+        ExcelUtil.write(workbook, 0, index, 6, getAcadExchResp.getLevel());
+
+//        ExcelUtil.write(workbook, 0, index, 7, Integer.toString(getAcadExchResp.getRanking()));
+//        ExcelUtil.write(workbook, 0, index, 8, Integer.toString(getAcadExchResp.getTotalNumber()));
+//        ExcelUtil.write(workbook, 0, index, 9, getAcadExchResp.getProTeacher());
+//        ExcelUtil.write(workbook, 0, index, 7, getAcadExchResp.getProTime());
+        ExcelUtil.write(workbook, 0, index, 7, getAcadExchResp.getResult());
+        ExcelUtil.write(workbook, 0, index, 8, Float.toString(getAcadExchResp.getScore()));
+        ExcelUtil.write(workbook, 0, index, 9, getAcadExchResp.getStatus());
+    }
+
+    @Override
+    public void writeWorkIntoExcel(Workbook workbook, GetWorkResp getWorkResp, int index) {
+        ExcelUtil.write(workbook, 0, index, 0, getWorkResp.getStuId());
+        ExcelUtil.write(workbook, 0, index, 1, getWorkResp.getName());
+        ExcelUtil.write(workbook, 0, index, 2, getWorkResp.getWorkType());
+        ExcelUtil.write(workbook, 0, index, 3, getWorkResp.getCompanyName());
+
+        ExcelUtil.write(workbook, 0, index, 4, getWorkResp.getIsCmp());
+        ExcelUtil.write(workbook, 0, index, 5, getWorkResp.getWorkClass());
+        ExcelUtil.write(workbook, 0, index, 6, getWorkResp.getCompanyType());
+        ExcelUtil.write(workbook, 0, index, 7, getWorkResp.getAddress());
+        ExcelUtil.write(workbook, 0, index, 8, getWorkResp.getGetDate());
+        ExcelUtil.write(workbook, 0, index, 9, Float.toString(getWorkResp.getScore()));
+        ExcelUtil.write(workbook, 0, index, 10, getWorkResp.getStatus());
+    }
+
+    @Override
+    public void writeMasterPaperIntoExcel(Workbook workbook, GetMasterPaperResp getMasterPaperResp, int index) {
+        ExcelUtil.write(workbook, 0, index, 0, getMasterPaperResp.getStuId());
+        ExcelUtil.write(workbook, 0, index, 1, getMasterPaperResp.getName());
+        ExcelUtil.write(workbook, 0, index, 2, getMasterPaperResp.getPaperName());
+        ExcelUtil.write(workbook, 0, index, 3, getMasterPaperResp.getPaperAbstract());
+
+        ExcelUtil.write(workbook, 0, index, 4, getMasterPaperResp.getScore1());
+        ExcelUtil.write(workbook, 0, index, 5, getMasterPaperResp.getScore2());
+        ExcelUtil.write(workbook, 0, index, 6, getMasterPaperResp.getScore4());
+        ExcelUtil.write(workbook, 0, index, 7, getMasterPaperResp.getScore3());
+        ExcelUtil.write(workbook, 0, index, 8, getMasterPaperResp.getGetDate());
+        ExcelUtil.write(workbook, 0, index, 9, Float.toString(getMasterPaperResp.getScore()));
+        ExcelUtil.write(workbook, 0, index, 10, getMasterPaperResp.getStatus());
+    }
 }

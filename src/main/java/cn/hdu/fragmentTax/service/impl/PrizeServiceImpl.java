@@ -11,6 +11,7 @@ import cn.hdu.fragmentTax.utils.FormatUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Paper;
 import java.util.*;
 
 @Service
@@ -130,7 +131,18 @@ public class PrizeServiceImpl implements IPrizeService {
         Map<String, Object> resp = new HashMap<>();
         if (!FormatUtil.isEmpty(editPaperRequ.getId())) {
             // 更新
-
+            PaperEntity paperEntityOld = paperMapper.queryByKey(editPaperRequ.getId());
+            // 如果本来已经审核过，则修改总分数和排名
+            if (paperEntityOld.getState() == 2) {
+                allPrizeMapper.deletePaperScore(editPaperRequ.getStuId(), paperEntityOld.getScore());
+                // 更新排名
+                Integer order = 1;
+                List<AllPrizeEntity> allPrizeEntities = allPrizeMapper.orderByPaper();
+                for (AllPrizeEntity allPrizeEntity : allPrizeEntities) {
+                    allPrizeMapper.updatePaperNum(allPrizeEntity.getId(), order);
+                    order = order + 1;
+                }
+            }
             try {
                 PaperEntity paperEntity = prizeModel.createPaperEntity(editPaperRequ);
                 paperEntity.setId(editPaperRequ.getId());
@@ -175,6 +187,18 @@ public class PrizeServiceImpl implements IPrizeService {
         Map<String, Object> resp = new HashMap<>();
         if (!FormatUtil.isEmpty(editPatentRequ.getId())) {
             // 更新
+            PatentEntity patentEntityOld = patentMapper.queryByKey(editPatentRequ.getId());
+            // 如果本来已经审核过，则修改总分数和排名
+            if (patentEntityOld.getState() == 2) {
+                allPrizeMapper.deletePatentScore(editPatentRequ.getStuId(), patentEntityOld.getScore());
+                // 更新排名
+                Integer order = 1;
+                List<AllPrizeEntity> allPrizeEntities = allPrizeMapper.orderByPatent();
+                for (AllPrizeEntity allPrizeEntity : allPrizeEntities) {
+                    allPrizeMapper.updatePatentNum(allPrizeEntity.getId(), order);
+                    order = order + 1;
+                }
+            }
 
             try {
                 PatentEntity patentEntity = prizeModel.createPatentEntity(editPatentRequ);
@@ -220,6 +244,19 @@ public class PrizeServiceImpl implements IPrizeService {
         Map<String, Object> resp = new HashMap<>();
         if (!FormatUtil.isEmpty(editCompetitionRequ.getId())) {
             // 更新
+            CompetitionEntity competitionEntityOld = competitionMapper.queryByKey(editCompetitionRequ.getId());
+            // 如果本来已经审核过，则修改总分数和排名
+            if (competitionEntityOld.getState() == 2) {
+                allPrizeMapper.deleteCompetitionScore(editCompetitionRequ.getStuId(), competitionEntityOld.getScore());
+                // 更新排名
+                Integer order = 1;
+                List<AllPrizeEntity> allPrizeEntities = allPrizeMapper.orderByCompetition();
+                for (AllPrizeEntity allPrizeEntity : allPrizeEntities) {
+                    allPrizeMapper.updateCompetitionNum(allPrizeEntity.getId(), order);
+                    order = order + 1;
+                }
+            }
+
             try {
                 CompetitionEntity competitionEntity = prizeModel.createCompetitionEntity(editCompetitionRequ);
                 competitionEntity.setId(editCompetitionRequ.getId());
@@ -352,6 +389,18 @@ public class PrizeServiceImpl implements IPrizeService {
         Map<String, Object> resp = new HashMap<>();
         if (!FormatUtil.isEmpty(editEngiProRequ.getId())) {
             // 更新
+            EngineeringProEntity engineeringProEntityOld = engineeringProMapper.queryByKey(editEngiProRequ.getId());
+            // 如果本来已经审核过，则修改总分数和排名
+            if (engineeringProEntityOld.getState() == 2) {
+                allPrizeMapper.deleteProjectScore(editEngiProRequ.getStuId(), engineeringProEntityOld.getScore());
+                // 更新排名
+                Integer order = 1;
+                List<AllPrizeEntity> allPrizeEntities = allPrizeMapper.orderByEngiPro();
+                for (AllPrizeEntity allPrizeEntity : allPrizeEntities) {
+                    allPrizeMapper.updateEngiProNum(allPrizeEntity.getId(), order);
+                    order = order + 1;
+                }
+            }
             try {
                 EngineeringProEntity engineeringProEntity = prizeModel.createEngiProEntity(editEngiProRequ);
                 engineeringProEntity.setId(editEngiProRequ.getId());
@@ -668,6 +717,18 @@ public class PrizeServiceImpl implements IPrizeService {
         Map<String, Object> resp = new HashMap<>();
         if (!FormatUtil.isEmpty(editProjectRequ.getId())) {
             // 更新
+            ProjectsEntity projectsEntityOld = projectsMapper.queryByKey(editProjectRequ.getId());
+            // 如果本来已经审核过，则修改总分数和排名
+            if (projectsEntityOld.getState() == 2) {
+                allPrizeMapper.deleteProjectScore(editProjectRequ.getStuId(), projectsEntityOld.getScore());
+                // 更新排名
+                Integer order = 1;
+                List<AllPrizeEntity> allPrizeEntities = allPrizeMapper.orderByEngiPro();
+                for (AllPrizeEntity allPrizeEntity : allPrizeEntities) {
+                    allPrizeMapper.updateEngiProNum(allPrizeEntity.getId(), order);
+                    order = order + 1;
+                }
+            }
 
             try {
                 ProjectsEntity projectsEntity = prizeModel.createProjectEntity(editProjectRequ);

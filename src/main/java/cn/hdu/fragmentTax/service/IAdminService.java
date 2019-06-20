@@ -58,4 +58,42 @@ public interface IAdminService {
     Map<String,Object> showProjectsForTeacher(QueryRequ queryRequ);
 
     Map<String,Object> examProject(AdminExamRequ adminExamRequ);
+
+    Map<String,Object> showStuBaseNum(QueryRequ queryRequ);
+
+    Map<String,Object> showStuScoreNum(QueryRequ queryRequ);
+
+    Map<String,Object> showStuPrizeNum(QueryRequ queryRequ);
+
+    Map<String,Object> showStuHonorNum(QueryRequ queryRequ);
+
+    Map<String,Object> showStuPaperNum(QueryRequ queryRequ);
+
+    Map<String,Object> showStuPatentNum(QueryRequ queryRequ);
+
+    Map<String,Object> showStuCompetitionNum(QueryRequ queryRequ);
+
+    Map<String,Object> showStuProjectNum(QueryRequ queryRequ);
+
+    Map<String,Object> showStuAcadExchNum(QueryRequ queryRequ);
+
+    Map<String,Object> showStuWorkNum(QueryRequ queryRequ);
+
+    Map<String,Object> showStuMasterPaperNum(QueryRequ queryRequ);
+
+    Map<String,Object> downHonorsForTeacher(QueryRequ queryRequ);
+
+    Map<String,Object> downPapersForTeacher(QueryRequ queryRequ);
+
+    Map<String,Object> downPatentsForTeacher(QueryRequ queryRequ);
+
+    Map<String,Object> downCompesForTeacher(QueryRequ queryRequ);
+
+    Map<String,Object> downProjectsForTeacher(QueryRequ queryRequ);
+
+    Map<String,Object> downAcadExchsForTeacher(QueryRequ queryRequ);
+
+    Map<String,Object> downWorksForTeacher(QueryRequ queryRequ);
+
+    Map<String,Object> downMasterPapersForTeacher(QueryRequ queryRequ);
 }

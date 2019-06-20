@@ -406,4 +406,56 @@ public interface IAllPrizeMapper {
 
     @Update("UPDATE `all_prize` SET work_num=#{workNum} WHERE `id` = #{id}")
     void updateWorkNum(@Param("id") Integer id, @Param("workNum") Integer order);
+
+    @Select("SELECT count(*) FROM `all_prize` WHERE  `state` = 1 and `stu_id` in (${stuIds})")
+    @Results({
+            @Result(property = "num", column = "count(*)")
+    })
+    int queryCountByStuIds(@Param("stuIds") String stuIds);
+
+
+    @Select("SELECT `id`, `stu_id`, `honor_score`, `honor_num`, `paper_socre`, `paper_num`, `patent_score`, `patent_num`, `state`, `created_time`, `changed_time`, `competition_score`, `competition_num`, `engi_score`, `engi_num`, `entr_score`, `entr_num`, `inno_score`, `inno_num`, `exch_score`, `exch_num`, `work_score`, `work_num`, `master_score`, `master_num`, `all_score`, `all_num`, `total_count` FROM `all_prize` where `stu_id` in (${stuIds}) and `state` <> 0 order by `stu_id` DESC limit #{start}, 10")
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "stuId", column = "stu_id"),
+            @Result(property = "honorScore", column = "honor_score"),
+            @Result(property = "honorNum", column = "honor_num"),
+            @Result(property = "paperSocre", column = "paper_socre"),
+            @Result(property = "paperNum", column = "paper_num"),
+            @Result(property = "patentScore", column = "patent_score"),
+            @Result(property = "patentNum", column = "patent_num"),
+            @Result(property = "state", column = "state"),
+            @Result(property = "createdTime", column = "created_time"),
+            @Result(property = "changedTime", column = "changed_time"),
+            @Result(property = "competitionScore", column = "competition_score"),
+            @Result(property = "competitionNum", column = "competition_num"),
+            @Result(property = "engiScore", column = "engi_score"),
+            @Result(property = "engiNum", column = "engi_num"),
+            @Result(property = "entrScore", column = "entr_score"),
+            @Result(property = "entrNum", column = "entr_num"),
+            @Result(property = "innoScore", column = "inno_score"),
+            @Result(property = "innoNum", column = "inno_num"),
+            @Result(property = "exchScore", column = "exch_score"),
+            @Result(property = "exchNum", column = "exch_num"),
+            @Result(property = "workScore", column = "work_score"),
+            @Result(property = "workNum", column = "work_num"),
+            @Result(property = "masterScore", column = "master_score"),
+            @Result(property = "masterNum", column = "master_num"),
+            @Result(property = "allScore", column = "all_score"),
+            @Result(property = "allNum", column = "all_num"),
+            @Result(property = "totalCount", column = "total_count")
+    })
+    List<AllPrizeEntity> queryByStuIdWithPage(@Param("stuIds") String stuIds, @Param("start") int start);
+
+    @Update("UPDATE `all_prize` SET paper_socre=`paper_socre`- #{paperScore} WHERE `stu_id` = #{stuId}")
+    void deletePaperScore(@Param("stuId") String stuId, @Param("paperScore") Float paperScore);
+
+    @Update("UPDATE `all_prize` SET patent_score=`patent_score`- #{patentScore} WHERE `stu_id` = #{stuId}")
+    void deletePatentScore(@Param("stuId") String stuId, @Param("patentScore") Float patentScore);
+
+    @Update("UPDATE `all_prize` SET competition_score=`competition_score`- #{competitionScore} WHERE `stu_id` = #{stuId}")
+    void deleteCompetitionScore(@Param("stuId") String stuId, @Param("competitionScore") Float competitionScore);
+
+    @Update("UPDATE `all_prize` SET engi_score=`engi_score`- #{projectScore} WHERE `stu_id` = #{stuId}")
+    void deleteProjectScore(@Param("stuId") String stuId, @Param("projectScore") Float projectScore);
 }

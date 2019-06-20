@@ -34,4 +34,20 @@ public interface IAdminModel {
     void writeStuBaseInfoIntoExcel(Workbook workbook, GetStuForTeacherResp getStuForTeacherResp, int index);
 
     GetProjectResp createGetProjectResp(ProjectsEntity projectsEntity, StuBaseEntity stuBaseEntity);
+
+    void writeHonorIntoExcel(Workbook workbook, GetHonorResp getHonorResp, int index);
+
+    void writePaperIntoExcel(Workbook workbook, GetPaperResp getPaperResp, int index);
+
+    void writePatentIntoExcel(Workbook workbook, GetPatentResp getPatentResp, int index);
+
+    void writeCompetitionIntoExcel(Workbook workbook, GetCompetitionResp getCompetitionResp, int index);
+
+    void writeProjectIntoExcel(Workbook workbook, GetProjectResp getProjectResp, int index);
+
+    void writeAcadExchExcel(Workbook workbook, GetAcadExchResp getAcadExchResp, int index);
+
+    void writeWorkIntoExcel(Workbook workbook, GetWorkResp getWorkResp, int index);
+
+    void writeMasterPaperIntoExcel(Workbook workbook, GetMasterPaperResp getMasterPaperResp, int index);
 }

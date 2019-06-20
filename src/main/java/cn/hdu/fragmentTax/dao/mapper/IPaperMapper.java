@@ -89,7 +89,7 @@ public interface IPaperMapper {
     })
     List<PaperEntity> queryForAdmin(@Param("state") String status);
 
-    @Select("SELECT `id`, `stu_id`, `paper_grade`, `paper_title`, `journal_title`, `ranking`, `total_number`, `paper_state`, `proof_material_id`, `score`, `state`, `created_time`, `changed_time` FROM `paper` where `state` in (${state}) and `stu_id` in (${stuIds}) and `paper_grade` like #{paperGrade}")
+    @Select("SELECT `id`, `stu_id`, `paper_grade`, `paper_title`, `journal_title`, `ranking`, `total_number`, `paper_state`, `proof_material_id`, `score`, `state`, `created_time`, `changed_time` FROM `paper` where `state` in (${state}) and `stu_id` in (${stuIds}) and `paper_grade` like #{paperGrade} order by `stu_id` desc limit #{start}, 10")
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "stuId", column = "stu_id"),
@@ -105,7 +105,26 @@ public interface IPaperMapper {
             @Result(property = "createdTime", column = "created_time"),
             @Result(property = "changedTime", column = "changed_time")
     })
-    List<PaperEntity> queryForTutor(@Param("state") String status, @Param("stuIds") String stuIds, @Param("paperGrade") String paperGrade);
+    List<PaperEntity> queryForTutor(@Param("state") String status, @Param("stuIds") String stuIds, @Param("paperGrade") String paperGrade, @Param("start") int start);
+
+
+    @Select("SELECT `id`, `stu_id`, `paper_grade`, `paper_title`, `journal_title`, `ranking`, `total_number`, `paper_state`, `proof_material_id`, `score`, `state`, `created_time`, `changed_time` FROM `paper` where `state` in (${state}) and `stu_id` in (${stuIds}) and `paper_grade` like #{paperGrade} order by `stu_id` desc")
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "stuId", column = "stu_id"),
+            @Result(property = "paperGrade", column = "paper_grade"),
+            @Result(property = "paperTitle", column = "paper_title"),
+            @Result(property = "journalTitle", column = "journal_title"),
+            @Result(property = "ranking", column = "ranking"),
+            @Result(property = "totalNumber", column = "total_number"),
+            @Result(property = "paperState", column = "paper_state"),
+            @Result(property = "proofMaterialId", column = "proof_material_id"),
+            @Result(property = "score", column = "score"),
+            @Result(property = "state", column = "state"),
+            @Result(property = "createdTime", column = "created_time"),
+            @Result(property = "changedTime", column = "changed_time")
+    })
+    List<PaperEntity> queryAllForTutor(@Param("state") String status, @Param("stuIds") String stuIds, @Param("paperGrade") String paperGrade);
 
     @Update("UPDATE `paper` SET score=#{score}, state=#{state} WHERE `id` = #{id}")
     void updateScore(@Param("id") String id, @Param("score") Float score, @Param("state") Integer state);
@@ -127,4 +146,10 @@ public interface IPaperMapper {
             @Result(property = "changedTime", column = "changed_time")
     })
     List<PaperEntity> queryByStuId(@Param("stuId") String stuId, @Param("state") Integer state);
+
+    @Select("SELECT count(*) FROM `paper` WHERE `state` in (${state}) and `stu_id` in (${stuIds}) and `paper_grade` like #{paperGrade}")
+    @Results({
+            @Result(property = "num", column = "count(*)")
+    })
+    int queryCountForTutor(@Param("state") String status, @Param("stuIds") String stuIds, @Param("paperGrade") String paperGrade);
 }

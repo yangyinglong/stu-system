@@ -85,7 +85,7 @@ public interface IAcademicExchangeMapper {
     })
     List<AcademicExchangeEntity> queryForAdmin(@Param("states") String status);
 
-    @Select("SELECT `id`, `stu_id`, `exchange_type`, `organization`, `conference_name`, `start_time`, `end_time`, `level`, `result`, `proof_material_id`, `score`, `state` FROM `academic_exchange` WHERE `state` in (${states}) and `stu_id` in (${stuIds}) and `exchange_type` like #{exchangeType}")
+    @Select("SELECT `id`, `stu_id`, `exchange_type`, `organization`, `conference_name`, `start_time`, `end_time`, `level`, `result`, `proof_material_id`, `score`, `state` FROM `academic_exchange` WHERE `state` in (${states}) and `stu_id` in (${stuIds}) and `exchange_type` like #{exchangeType} order by `stu_id` desc limit #{start}, 10")
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "stuId", column = "stu_id"),
@@ -100,7 +100,25 @@ public interface IAcademicExchangeMapper {
             @Result(property = "score", column = "score"),
             @Result(property = "state", column = "state")
     })
-    List<AcademicExchangeEntity> queryForTutor(@Param("states") String status, @Param("stuIds") String stuIds, @Param("exchangeType") String exchangeType);
+    List<AcademicExchangeEntity> queryForTutor(@Param("states") String status, @Param("stuIds") String stuIds, @Param("exchangeType") String exchangeType, @Param("start") int start);
+
+    @Select("SELECT `id`, `stu_id`, `exchange_type`, `organization`, `conference_name`, `start_time`, `end_time`, `level`, `result`, `proof_material_id`, `score`, `state` FROM `academic_exchange` WHERE `state` in (${states}) and `stu_id` in (${stuIds}) and `exchange_type` like #{exchangeType} order by `stu_id` desc")
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "stuId", column = "stu_id"),
+            @Result(property = "exchangeType", column = "exchange_type"),
+            @Result(property = "organization", column = "organization"),
+            @Result(property = "conferenceName", column = "conference_name"),
+            @Result(property = "startTime", column = "start_time"),
+            @Result(property = "endTime", column = "end_time"),
+            @Result(property = "level", column = "level"),
+            @Result(property = "result", column = "result"),
+            @Result(property = "proofMaterialId", column = "proof_material_id"),
+            @Result(property = "score", column = "score"),
+            @Result(property = "state", column = "state")
+    })
+    List<AcademicExchangeEntity> queryAllForTutor(@Param("states") String status, @Param("stuIds") String stuIds, @Param("exchangeType") String exchangeType);
+
 
     @Update("UPDATE `academic_exchange` SET score=#{score}, state=#{state} WHERE `id` = #{id}")
     void updateScore(@Param("id") String id, @Param("score") Float score, @Param("state") Integer state);
@@ -121,4 +139,11 @@ public interface IAcademicExchangeMapper {
             @Result(property = "state", column = "state")
     })
     List<AcademicExchangeEntity> queryByStuId(@Param("stuId") String stuId, @Param("state") Integer state);
+
+    @Select("SELECT count(*) FROM `academic_exchange` WHERE `state` in (${states}) and `stu_id` in (${stuIds}) and `exchange_type` like #{exchangeType}")
+    @Results({
+            @Result(property = "num", column = "count(*)")
+    })
+    int queryCountForTutor(@Param("states") String status, @Param("stuIds") String stuIds, @Param("exchangeType") String exchangeType);
+
 }

@@ -341,4 +341,160 @@ public class AdminController {
     }
 
 
+
+    @Path("/showstubasenum")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Map<String, Object> showStuBaseNum(QueryRequ queryRequ){
+        Map<String, Object> resp = adminService.showStuBaseNum(queryRequ);
+        return resp;
+    }
+
+    @Path("/showstuscorenum")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Map<String, Object> showStuScoreNum(QueryRequ queryRequ){
+        Map<String, Object> resp = adminService.showStuScoreNum(queryRequ);
+        return resp;
+    }
+
+
+    @Path("/showstuprizenum")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Map<String, Object> showStuPrizeNum(QueryRequ queryRequ){
+        Map<String, Object> resp = adminService.showStuPrizeNum(queryRequ);
+        return resp;
+    }
+
+    @Path("/showstuhonornum")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Map<String, Object> showStuHonorNum(QueryRequ queryRequ){
+        Map<String, Object> resp = adminService.showStuHonorNum(queryRequ);
+        return resp;
+    }
+
+    @Path("/showstupapernum")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Map<String, Object> showStuPaperNum(QueryRequ queryRequ){
+        Map<String, Object> resp = adminService.showStuPaperNum(queryRequ);
+        return resp;
+    }
+
+    @Path("/showstupatentnum")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Map<String, Object> showStuPatentNum(QueryRequ queryRequ){
+        Map<String, Object> resp = adminService.showStuPatentNum(queryRequ);
+        return resp;
+    }
+
+
+    @Path("/showstucompetitionnum")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Map<String, Object> showStuCompetitionNum(QueryRequ queryRequ){
+        Map<String, Object> resp = adminService.showStuCompetitionNum(queryRequ);
+        return resp;
+    }
+
+    @Path("/showstuprojectnum")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Map<String, Object> showStuProjectNum(QueryRequ queryRequ){
+        Map<String, Object> resp = adminService.showStuProjectNum(queryRequ);
+        return resp;
+    }
+
+    @Path("/showstuacadexchnum")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Map<String, Object> showStuAcadExchNum(QueryRequ queryRequ){
+        Map<String, Object> resp = adminService.showStuAcadExchNum(queryRequ);
+        return resp;
+    }
+
+    @Path("/showstuworknum")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Map<String, Object> showStuWorkNum(QueryRequ queryRequ){
+        Map<String, Object> resp = adminService.showStuWorkNum(queryRequ);
+        return resp;
+    }
+
+
+    @Path("/showstumasterpapernum")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Map<String, Object> showStuMasterPaperNum(QueryRequ queryRequ){
+        Map<String, Object> resp = adminService.showStuMasterPaperNum(queryRequ);
+        return resp;
+    }
+
+
+    @Path("/downHonorsForTeacher")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Map<String, Object> downHonorsForTeacher(QueryRequ queryRequ){
+        Map<String, Object> resp = adminService.downHonorsForTeacher(queryRequ);
+        return resp;
+    }
+
+    @Path("/downPapersForTeacher")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Map<String, Object> downPapersForTeacher(QueryRequ queryRequ){
+        Map<String, Object> resp = adminService.downPapersForTeacher(queryRequ);
+        return resp;
+    }
+
+    @Path("/downPatentsForTeacher")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Map<String, Object> downPatentsForTeacher(QueryRequ queryRequ){
+        Map<String, Object> resp = adminService.downPatentsForTeacher(queryRequ);
+        return resp;
+    }
+
+    @Path("/downCompesForTeacher")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Map<String, Object> downCompesForTeacher(QueryRequ queryRequ){
+        Map<String, Object> resp = adminService.downCompesForTeacher(queryRequ);
+        return resp;
+    }
+
+    @Path("/downProjectsForTeacher")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Map<String, Object> downProjectsForTeacher(QueryRequ queryRequ){
+        Map<String, Object> resp = adminService.downProjectsForTeacher(queryRequ);
+        return resp;
+    }
+
+    @Path("/downAcadExchsForTeacher")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Map<String, Object> downAcadExchsForTeacher(QueryRequ queryRequ){
+        Map<String, Object> resp = adminService.downAcadExchsForTeacher(queryRequ);
+        return resp;
+    }
+
+    @Path("/downWorksForTeacher")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Map<String, Object> downWorksForTeacher(QueryRequ queryRequ){
+        Map<String, Object> resp = adminService.downWorksForTeacher(queryRequ);
+        return resp;
+    }
+
+    @Path("/downMasterPapersForTeacher")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Map<String, Object> downMasterPapersForTeacher(QueryRequ queryRequ){
+        Map<String, Object> resp = adminService.downMasterPapersForTeacher(queryRequ);
+        return resp;
+    }
 }

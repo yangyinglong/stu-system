@@ -103,7 +103,7 @@ public class AdminServiceImpl implements IAdminService {
             resp.put("r", getHonorResps);
             return resp;
         }
-        honorEntities = honorMapper.queryForTutor(status, stuIds, queryRequ.getHonorType());
+        honorEntities = honorMapper.queryForTutor(status, stuIds, queryRequ.getHonorType(), (queryRequ.getPage()-1)*10);
         for (HonorEntity honorEntity : honorEntities) {
             StuBaseEntity stuBaseEntity = stuBaseMapper.queryByStuId(honorEntity.getStuId());
             if (FormatUtil.isEmpty(stuBaseEntity)) {
@@ -166,7 +166,7 @@ public class AdminServiceImpl implements IAdminService {
             resp.put("r", getPaperResps);
             return resp;
         }
-        paperEntities = paperMapper.queryForTutor(status, stuIds, queryRequ.getPaperGrade());
+        paperEntities = paperMapper.queryForTutor(status, stuIds, queryRequ.getPaperGrade(), (queryRequ.getPage()-1)*10);
         for (PaperEntity paperEntity : paperEntities) {
             StuBaseEntity stuBaseEntity = stuBaseMapper.queryByStuId(paperEntity.getStuId());
             if (FormatUtil.isEmpty(stuBaseEntity)) {
@@ -229,7 +229,7 @@ public class AdminServiceImpl implements IAdminService {
             resp.put("r", getPatentResps);
             return resp;
         }
-        patentEntities = patentMapper.queryForTutor(status, stuIds, queryRequ.getPatentType(), queryRequ.getPatentState());
+        patentEntities = patentMapper.queryForTutor(status, stuIds, queryRequ.getPatentType(), queryRequ.getPatentState(), (queryRequ.getPage()-1)*10);
         for (PatentEntity patentEntity : patentEntities) {
             StuBaseEntity stuBaseEntity = stuBaseMapper.queryByStuId(patentEntity.getStuId());
             if (FormatUtil.isEmpty(stuBaseEntity)) {
@@ -292,7 +292,7 @@ public class AdminServiceImpl implements IAdminService {
             resp.put("r", getCompetitionResps);
             return resp;
         }
-        competitionEntities = competitionMapper.queryForTutor(status, stuIds, queryRequ.getCompetitionType(), queryRequ.getCompetitionLevel());
+        competitionEntities = competitionMapper.queryForTutor(status, stuIds, queryRequ.getCompetitionType(), queryRequ.getCompetitionLevel(), (queryRequ.getPage()-1)*10);
         for (CompetitionEntity competitionEntity : competitionEntities) {
             StuBaseEntity stuBaseEntity = stuBaseMapper.queryByStuId(competitionEntity.getStuId());
             if (FormatUtil.isEmpty(stuBaseEntity)) {
@@ -544,7 +544,7 @@ public class AdminServiceImpl implements IAdminService {
             resp.put("r", getAcadExchResps);
             return resp;
         }
-        academicExchangeEntities = academicExchangeMapper.queryForTutor(status, stuIds, queryRequ.getExchangeType());
+        academicExchangeEntities = academicExchangeMapper.queryForTutor(status, stuIds, queryRequ.getExchangeType(), (queryRequ.getPage()-1)*10);
         for (AcademicExchangeEntity academicExchangeEntity : academicExchangeEntities) {
             StuBaseEntity stuBaseEntity = stuBaseMapper.queryByStuId(academicExchangeEntity.getStuId());
             if (FormatUtil.isEmpty(stuBaseEntity)) {
@@ -607,7 +607,7 @@ public class AdminServiceImpl implements IAdminService {
             resp.put("r", getMasterPaperResps);
             return resp;
         }
-        masterPaperEntities = masterPaperMapper.queryForTutor(status, stuIds);
+        masterPaperEntities = masterPaperMapper.queryForTutor(status, stuIds, (queryRequ.getPage()-1)*10);
         for (MasterPaperEntity masterPaperEntity : masterPaperEntities) {
             StuBaseEntity stuBaseEntity = stuBaseMapper.queryByStuId(masterPaperEntity.getStuId());
             if (FormatUtil.isEmpty(stuBaseEntity)) {
@@ -670,7 +670,7 @@ public class AdminServiceImpl implements IAdminService {
             resp.put("r", getWorkResps);
             return resp;
         }
-        workEntities = workMapper.queryForTutor(status, stuIds, queryRequ.getWorkType());
+        workEntities = workMapper.queryForTutor(status, stuIds, queryRequ.getWorkType(), (queryRequ.getPage()-1)*10);
         for (WorkEntity workEntity : workEntities) {
             StuBaseEntity stuBaseEntity = stuBaseMapper.queryByStuId(workEntity.getStuId());
             if (FormatUtil.isEmpty(stuBaseEntity)) {
@@ -720,10 +720,10 @@ public class AdminServiceImpl implements IAdminService {
         if (queryRequ.getState() == 1) {
 //            辅导员查询
 //            stuBaseEntities = stuBaseMapper.queryAll();
-            stuBaseEntities = stuBaseMapper.queryForCouner(queryRequ.getStuId(), queryRequ.getStuName());
+            stuBaseEntities = stuBaseMapper.queryForCounerWithPage(queryRequ.getStuId(), queryRequ.getStuName(), (queryRequ.getPage()-1)*10);
         } else {
 //            导师查询
-            stuBaseEntities = stuBaseMapper.queryByTutorId(queryRequ.getUserId());
+            stuBaseEntities = stuBaseMapper.queryByTutorIdWithPage(queryRequ.getUserId(), (queryRequ.getPage()-1)*10);
         }
         for (StuBaseEntity stuBaseEntity : stuBaseEntities) {
             TutorsEntity tutorsEntity = tutorsMapper.queryByTuId(stuBaseEntity.getTutorId());
@@ -742,6 +742,7 @@ public class AdminServiceImpl implements IAdminService {
     public Map<String, Object> showAllPrizeForTeacher(QueryRequ queryRequ) {
         Map<String, Object> resp = new HashMap<>();
         List<StuBaseEntity> stuBaseEntities = null;
+        List<AllPrizeEntity> allPrizeEntities = null;
         List<GetPrizeForTeacherResp> getPrizeForTeacherResps = new LinkedList<GetPrizeForTeacherResp>();
         if (queryRequ.getState() == 1) {
 //            辅导员查询
@@ -750,12 +751,19 @@ public class AdminServiceImpl implements IAdminService {
 //            导师查询
             stuBaseEntities = stuBaseMapper.queryByTutorId(queryRequ.getUserId());
         }
+        String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
+        allPrizeEntities = allPrizeMapper.queryByStuIdWithPage(stuIds, (queryRequ.getPage()-1)*10);
         Integer allStuNum = stuBaseMapper.queryCount();
-        for (StuBaseEntity stuBaseEntity : stuBaseEntities) {
-            AllPrizeEntity allPrizeEntity = allPrizeMapper.queryByStuId(stuBaseEntity.getStuId());
+        for (AllPrizeEntity allPrizeEntity : allPrizeEntities) {
+            StuBaseEntity stuBaseEntity = stuBaseMapper.queryByStuId(allPrizeEntity.getStuId());
             GetPrizeForTeacherResp getPrizeForTeacherResp = adminModel.createGetPrizeForTeacherResp(allPrizeEntity, stuBaseEntity, allStuNum);
             getPrizeForTeacherResps.add(getPrizeForTeacherResp);
         }
+//        for (StuBaseEntity stuBaseEntity : stuBaseEntities) {
+//            AllPrizeEntity allPrizeEntity = allPrizeMapper.queryByStuId(stuBaseEntity.getStuId());
+//            GetPrizeForTeacherResp getPrizeForTeacherResp = adminModel.createGetPrizeForTeacherResp(allPrizeEntity, stuBaseEntity, allStuNum);
+//            getPrizeForTeacherResps.add(getPrizeForTeacherResp);
+//        }
         resp.put("c", 200);
         resp.put("r", getPrizeForTeacherResps);
         return resp;
@@ -766,6 +774,7 @@ public class AdminServiceImpl implements IAdminService {
         Map<String, Object> resp = new HashMap<>();
         List<StuBaseEntity> stuBaseEntities = null;
         List<GetAllScoreResp> getAllScoreResps = new LinkedList<GetAllScoreResp>();
+        List<ScoreAllEntity> scoreAllEntities = null;
         if (queryRequ.getState() == 1) {
 //            辅导员查询
             stuBaseEntities = stuBaseMapper.queryForCouner(queryRequ.getStuId(), queryRequ.getStuName());
@@ -773,21 +782,39 @@ public class AdminServiceImpl implements IAdminService {
 //            导师查询
             stuBaseEntities = stuBaseMapper.queryByTutorId(queryRequ.getUserId());
         }
-        for (StuBaseEntity stuBaseEntity : stuBaseEntities) {
-            ScoreAllEntity scoreAllEntity = scoreAllMapper.queryByStuId(stuBaseEntity.getStuId());
-            ScoreAverageEntity scoreAverageEntity = scoreAverageMapper.queryByStuId(stuBaseEntity.getStuId());
+        String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
+        scoreAllEntities = scoreAllMapper.queryByStuIdWithPage(stuIds, (queryRequ.getPage()-1)*10);
+        for (ScoreAllEntity scoreAllEntity: scoreAllEntities) {
+            ScoreAverageEntity scoreAverageEntity = scoreAverageMapper.queryByStuId(scoreAllEntity.getStuId());
             if (FormatUtil.isEmpty(scoreAllEntity)) {
                 continue;
             }
             GetAllScoreResp getAllScoreResp = adminModel.createGetAllScoreResp(scoreAllEntity);
-            getAllScoreResp.setStuId(stuBaseEntity.getStuId());
-            getAllScoreResp.setName(stuBaseEntity.getName());
+            getAllScoreResp.setStuId(scoreAllEntity.getStuId());
+            getAllScoreResp.setName(stuBaseMapper.queryByStuId(scoreAllEntity.getStuId()).getName());
             getAllScoreResp.setCurrNumber(scoreAverageEntity.getCurrNumber());
             getAllScoreResp.setAverageScore(scoreAverageEntity.getAverageScore());
             getAllScoreResp.setWeightedAverageScore(scoreAverageEntity.getWeightedAverageScore());
             getAllScoreResp.setHadCredit(scoreAverageEntity.getHadCredit());
             getAllScoreResps.add(getAllScoreResp);
         }
+
+
+//        for (StuBaseEntity stuBaseEntity : stuBaseEntities) {
+//            ScoreAllEntity scoreAllEntity = scoreAllMapper.queryByStuId(stuBaseEntity.getStuId());
+//            ScoreAverageEntity scoreAverageEntity = scoreAverageMapper.queryByStuId(stuBaseEntity.getStuId());
+//            if (FormatUtil.isEmpty(scoreAllEntity)) {
+//                continue;
+//            }
+//            GetAllScoreResp getAllScoreResp = adminModel.createGetAllScoreResp(scoreAllEntity);
+//            getAllScoreResp.setStuId(stuBaseEntity.getStuId());
+//            getAllScoreResp.setName(stuBaseEntity.getName());
+//            getAllScoreResp.setCurrNumber(scoreAverageEntity.getCurrNumber());
+//            getAllScoreResp.setAverageScore(scoreAverageEntity.getAverageScore());
+//            getAllScoreResp.setWeightedAverageScore(scoreAverageEntity.getWeightedAverageScore());
+//            getAllScoreResp.setHadCredit(scoreAverageEntity.getHadCredit());
+//            getAllScoreResps.add(getAllScoreResp);
+//        }
         resp.put("c", 200);
         resp.put("r", getAllScoreResps);
         return resp;
@@ -795,12 +822,25 @@ public class AdminServiceImpl implements IAdminService {
 
     @Override
     public Map<String, Object> downStusForTeacher(QueryRequ queryRequ) {
-        Map<String, Object> resp = new HashMap<>();
-        resp = showStusForTeacher(queryRequ);
-        if (200 != (Integer)resp.get("c")) {
-            return resp;
+        List<StuBaseEntity> stuBaseEntities = null;
+        List<GetStuForTeacherResp> getStuForTeacherResps = new LinkedList<GetStuForTeacherResp>();
+        if (queryRequ.getState() == 1) {
+//            辅导员查询
+//            stuBaseEntities = stuBaseMapper.queryAll();
+            stuBaseEntities = stuBaseMapper.queryForCouner(queryRequ.getStuId(), queryRequ.getStuName());
+        } else {
+//            导师查询
+            stuBaseEntities = stuBaseMapper.queryByTutorId(queryRequ.getUserId());
         }
-        List<GetStuForTeacherResp> getStuForTeacherResps = (List<GetStuForTeacherResp>)resp.get("r");
+        for (StuBaseEntity stuBaseEntity : stuBaseEntities) {
+            TutorsEntity tutorsEntity = tutorsMapper.queryByTuId(stuBaseEntity.getTutorId());
+            CounsellorsEntity counsellorsEntity = counsellorsMapper.queryByCoId(stuBaseEntity.getCounsellorId());
+            ScoreEntranceEntity scoreEntranceEntity = scoreEntranceMapper.queryByStuId(stuBaseEntity.getStuId());
+            ScoreAverageEntity scoreAverageEntity = scoreAverageMapper.queryByStuId(stuBaseEntity.getStuId());
+            GetStuForTeacherResp getStuForTeacherResp = adminModel.createGetStuForTeacherResp(stuBaseEntity, tutorsEntity, counsellorsEntity, scoreEntranceEntity, scoreAverageEntity);
+            getStuForTeacherResps.add(getStuForTeacherResp);
+        }
+        Map<String, Object> resp = new HashMap<>();
         try {
             Workbook workbook = ExcelUtil.copyFile(PropertiesUtil.prop("template_path"));
             int index = 1;
@@ -840,7 +880,7 @@ public class AdminServiceImpl implements IAdminService {
             resp.put("r", getProjectResps);
             return resp;
         }
-        projectsEntities = projectsMapper.queryForTutor(status, stuIds, queryRequ.getProClass(), queryRequ.getProType());
+        projectsEntities = projectsMapper.queryForTutor(status, stuIds, queryRequ.getProClass(), queryRequ.getProType(), (queryRequ.getPage()-1)*10);
         for (ProjectsEntity projectsEntity : projectsEntities) {
             StuBaseEntity stuBaseEntity = stuBaseMapper.queryByStuId(projectsEntity.getStuId());
             if (FormatUtil.isEmpty(stuBaseEntity)) {
@@ -882,6 +922,685 @@ public class AdminServiceImpl implements IAdminService {
         }
 
         return  resp;
+    }
+
+    @Override
+    public Map<String, Object> showStuBaseNum(QueryRequ queryRequ) {
+        Map<String, Object> resp = new HashMap<>();
+        List<StuBaseEntity> stuBaseEntities = null;
+        List<GetStuForTeacherResp> getStuForTeacherResps = new LinkedList<GetStuForTeacherResp>();
+        int stuBaseNum = 0;
+        if (queryRequ.getState() == 1) {
+//            辅导员查询
+//            stuBaseEntities = stuBaseMapper.queryAll();
+            stuBaseNum = stuBaseMapper.queryNumForCouner(queryRequ.getStuId(), queryRequ.getStuName());
+        } else {
+//            导师查询
+            stuBaseNum = stuBaseMapper.queryNumByTutorId(queryRequ.getUserId());
+        }
+        resp.put("c", 200);
+        resp.put("r", stuBaseNum);
+        return resp;
+    }
+
+    @Override
+    public Map<String, Object> showStuScoreNum(QueryRequ queryRequ) {
+        Map<String, Object> resp = new HashMap<>();
+        List<StuBaseEntity> stuBaseEntities = null;
+        List<GetAllScoreResp> getAllScoreResps = new LinkedList<GetAllScoreResp>();
+        if (queryRequ.getState() == 1) {
+//            辅导员查询
+            stuBaseEntities = stuBaseMapper.queryForCouner(queryRequ.getStuId(), queryRequ.getStuName());
+        } else {
+//            导师查询
+            stuBaseEntities = stuBaseMapper.queryByTutorId(queryRequ.getUserId());
+        }
+        int stuScoreNum = 0;
+        String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
+        if (stuIds.equals("")){
+            resp.put("c", 200);
+            resp.put("r", 0);
+            return resp;
+        }
+        stuScoreNum = scoreAllMapper.queryCountByStuIds(stuIds);
+        resp.put("c", 200);
+        resp.put("r", stuScoreNum);
+        return resp;
+    }
+
+    @Override
+    public Map<String, Object> showStuPrizeNum(QueryRequ queryRequ) {
+        Map<String, Object> resp = new HashMap<>();
+        List<StuBaseEntity> stuBaseEntities = null;
+        List<GetAllScoreResp> getAllScoreResps = new LinkedList<GetAllScoreResp>();
+        if (queryRequ.getState() == 1) {
+//            辅导员查询
+            stuBaseEntities = stuBaseMapper.queryForCouner(queryRequ.getStuId(), queryRequ.getStuName());
+        } else {
+//            导师查询
+            stuBaseEntities = stuBaseMapper.queryByTutorId(queryRequ.getUserId());
+        }
+        int stuScoreNum = 0;
+        String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
+        if (stuIds.equals("")){
+            resp.put("c", 200);
+            resp.put("r", 0);
+            return resp;
+        }
+        stuScoreNum = allPrizeMapper.queryCountByStuIds(stuIds);
+        resp.put("c", 200);
+        resp.put("r", stuScoreNum);
+        return resp;
+    }
+
+    @Override
+    public Map<String, Object> showStuHonorNum(QueryRequ queryRequ) {
+        Map<String, Object> resp = new HashMap<>();
+        String status = FormatUtil.strings2String(getIntAuditStatus(queryRequ.getStatus()));
+        List<HonorEntity> honorEntities = null;
+        List<GetHonorResp> getHonorResps = new LinkedList<GetHonorResp>();
+        List<StuBaseEntity> stuBaseEntities = null;
+        if (queryRequ.getState() == 1) {
+//            辅导员查询
+            stuBaseEntities = stuBaseMapper.queryForCouner(queryRequ.getStuId(), queryRequ.getStuName());
+
+        } else {
+//            导师查询
+            stuBaseEntities = stuBaseMapper.queryByTutorId(queryRequ.getUserId());
+        }
+        String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
+        int stuHonorNum = 0;
+        if (stuIds.equals("")){
+            resp.put("c", 200);
+            resp.put("r", 0);
+            return resp;
+        }
+        stuHonorNum = honorMapper.queryCountForTutor(status, stuIds, queryRequ.getHonorType());
+        resp.put("c", 200);
+        resp.put("r", stuHonorNum);
+        return resp;
+    }
+
+    @Override
+    public Map<String, Object> showStuPaperNum(QueryRequ queryRequ) {
+        Map<String, Object> resp = new HashMap<>();
+        String status = FormatUtil.strings2String(getIntAuditStatus(queryRequ.getStatus()));
+        List<PaperEntity> paperEntities = null;
+        List<GetPaperResp> getPaperResps = new LinkedList<GetPaperResp>();
+        List<StuBaseEntity> stuBaseEntities = null;
+        if (queryRequ.getState() == 1) {
+//            辅导员查询
+            stuBaseEntities = stuBaseMapper.queryForCouner(queryRequ.getStuId(), queryRequ.getStuName());
+
+        } else {
+//            导师查询
+            stuBaseEntities = stuBaseMapper.queryByTutorId(queryRequ.getUserId());
+        }
+        String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
+        int stuPaperNum = 0;
+        if (stuIds.equals("")){
+            resp.put("c", 200);
+            resp.put("r", 0);
+            return resp;
+        }
+        stuPaperNum = paperMapper.queryCountForTutor(status, stuIds, queryRequ.getPaperGrade());
+        resp.put("c", 200);
+        resp.put("r", stuPaperNum);
+        return  resp;
+    }
+
+    @Override
+    public Map<String, Object> showStuPatentNum(QueryRequ queryRequ) {
+        Map<String, Object> resp = new HashMap<>();
+        String status = FormatUtil.strings2String(getIntAuditStatus(queryRequ.getStatus()));
+        List<PatentEntity> patentEntities = null;
+        List<GetPatentResp> getPatentResps = new LinkedList<GetPatentResp>();
+        List<StuBaseEntity> stuBaseEntities = null;
+        if (queryRequ.getState() == 1) {
+//            辅导员查询
+            stuBaseEntities = stuBaseMapper.queryForCouner(queryRequ.getStuId(), queryRequ.getStuName());
+
+        } else {
+//            导师查询
+            stuBaseEntities = stuBaseMapper.queryByTutorId(queryRequ.getUserId());
+        }
+        String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
+        int stuPatentNum = 0;
+        if (stuIds.equals("")){
+            resp.put("c", 200);
+            resp.put("r", stuPatentNum);
+            return resp;
+        }
+        stuPatentNum = patentMapper.queryCountForTutor(status, stuIds, queryRequ.getPatentType(), queryRequ.getPatentState());
+
+        resp.put("c", 200);
+        resp.put("r", stuPatentNum);
+        return resp;
+
+    }
+
+    @Override
+    public Map<String, Object> showStuCompetitionNum(QueryRequ queryRequ) {
+        Map<String, Object> resp = new HashMap<>();
+        String status = FormatUtil.strings2String(getIntAuditStatus(queryRequ.getStatus()));
+        List<CompetitionEntity> competitionEntities = null;
+        List<GetCompetitionResp> getCompetitionResps = new LinkedList<GetCompetitionResp>();
+        List<StuBaseEntity> stuBaseEntities = null;
+        if (queryRequ.getState() == 1) {
+//            辅导员查询
+            stuBaseEntities = stuBaseMapper.queryForCouner(queryRequ.getStuId(), queryRequ.getStuName());
+
+        } else {
+//            导师查询
+            stuBaseEntities = stuBaseMapper.queryByTutorId(queryRequ.getUserId());
+        }
+        String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
+        int stuCompetitionNum = 0;
+        if (stuIds.equals("")){
+            resp.put("c", 200);
+            resp.put("r", stuCompetitionNum);
+            return resp;
+        }
+        stuCompetitionNum = competitionMapper.queryCountForTutor(status, stuIds, queryRequ.getCompetitionType(), queryRequ.getCompetitionLevel());
+        resp.put("c", 200);
+        resp.put("r", stuCompetitionNum);
+        return resp;
+    }
+
+    @Override
+    public Map<String, Object> showStuProjectNum(QueryRequ queryRequ) {
+        Map<String, Object> resp = new HashMap<>();
+        String status = FormatUtil.strings2String(getIntAuditStatus(queryRequ.getStatus()));
+        List<ProjectsEntity> projectsEntities = null;
+        List<GetProjectResp> getProjectResps = new LinkedList<GetProjectResp>();
+        List<StuBaseEntity> stuBaseEntities = null;
+        if (queryRequ.getState() == 1) {
+//            辅导员查询
+            stuBaseEntities = stuBaseMapper.queryForCouner(queryRequ.getStuId(), queryRequ.getStuName());
+
+        } else {
+//            导师查询
+            stuBaseEntities = stuBaseMapper.queryByTutorId(queryRequ.getUserId());
+        }
+        String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
+        int stuProjectNum = 0;
+        if (stuIds.equals("")){
+            resp.put("c", 200);
+            resp.put("r", stuProjectNum);
+            return resp;
+        }
+        stuProjectNum = projectsMapper.queryCountForTutor(status, stuIds, queryRequ.getProClass(), queryRequ.getProType());
+        resp.put("c", 200);
+        resp.put("r", stuProjectNum);
+        return resp;
+    }
+
+    @Override
+    public Map<String, Object> showStuAcadExchNum(QueryRequ queryRequ) {
+        Map<String, Object> resp = new HashMap<>();
+        String status = FormatUtil.strings2String(getIntAuditStatus(queryRequ.getStatus()));
+        List<AcademicExchangeEntity> academicExchangeEntities = null;
+        List<GetAcadExchResp> getAcadExchResps = new LinkedList<GetAcadExchResp>();
+        List<StuBaseEntity> stuBaseEntities = null;
+        if (queryRequ.getState() == 1) {
+//            辅导员查询
+            stuBaseEntities = stuBaseMapper.queryForCouner(queryRequ.getStuId(), queryRequ.getStuName());
+
+        } else {
+//            导师查询
+            stuBaseEntities = stuBaseMapper.queryByTutorId(queryRequ.getUserId());
+        }
+        int stuAcadExchNum = 0;
+        String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
+        if (stuIds.equals("")){
+            resp.put("c", 200);
+            resp.put("r", stuAcadExchNum);
+            return resp;
+        }
+        stuAcadExchNum = academicExchangeMapper.queryCountForTutor(status, stuIds, queryRequ.getExchangeType());
+        resp.put("c", 200);
+        resp.put("r", stuAcadExchNum);
+        return resp;
+    }
+
+    @Override
+    public Map<String, Object> showStuWorkNum(QueryRequ queryRequ) {
+        Map<String, Object> resp = new HashMap<>();
+        String status = FormatUtil.strings2String(getIntAuditStatus(queryRequ.getStatus()));
+        List<WorkEntity> workEntities = null;
+        List<GetWorkResp> getWorkResps = new LinkedList<GetWorkResp>();
+        List<StuBaseEntity> stuBaseEntities = null;
+        if (queryRequ.getState() == 1) {
+//            辅导员查询
+            stuBaseEntities = stuBaseMapper.queryForCouner(queryRequ.getStuId(), queryRequ.getStuName());
+
+        } else {
+//            导师查询
+            stuBaseEntities = stuBaseMapper.queryByTutorId(queryRequ.getUserId());
+        }
+        String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
+        int stuWorkNum = 0;
+        if (stuIds.equals("")){
+            resp.put("c", 200);
+            resp.put("r", stuWorkNum);
+            return resp;
+        }
+        stuWorkNum = workMapper.queryCountForTutor(status, stuIds, queryRequ.getWorkType());
+        resp.put("c", 200);
+        resp.put("r", stuWorkNum);
+        return resp;
+    }
+
+    @Override
+    public Map<String, Object> showStuMasterPaperNum(QueryRequ queryRequ) {
+        Map<String, Object> resp = new HashMap<>();
+        String status = FormatUtil.strings2String(getIntAuditStatus(queryRequ.getStatus()));
+        List<MasterPaperEntity> masterPaperEntities = null;
+        List<GetMasterPaperResp> getMasterPaperResps = new LinkedList<GetMasterPaperResp>();
+        List<StuBaseEntity> stuBaseEntities = null;
+        if (queryRequ.getState() == 1) {
+//            辅导员查询
+            stuBaseEntities = stuBaseMapper.queryForCouner(queryRequ.getStuId(), queryRequ.getStuName());
+
+        } else {
+//            导师查询
+            stuBaseEntities = stuBaseMapper.queryByTutorId(queryRequ.getUserId());
+        }
+        int stuMasterPaperNum = 0;
+        String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
+        if (stuIds.equals("")){
+            resp.put("c", 200);
+            resp.put("r", stuMasterPaperNum);
+            return resp;
+        }
+        stuMasterPaperNum = masterPaperMapper.queryCountForTutor(status, stuIds);
+        resp.put("c", 200);
+        resp.put("r", stuMasterPaperNum);
+        return resp;
+    }
+
+    @Override
+    public Map<String, Object> downHonorsForTeacher(QueryRequ queryRequ) {
+        Map<String, Object> resp = new HashMap<>();
+        String status = FormatUtil.strings2String(getIntAuditStatus(queryRequ.getStatus()));
+        List<HonorEntity> honorEntities = null;
+        List<GetHonorResp> getHonorResps = new LinkedList<GetHonorResp>();
+        List<StuBaseEntity> stuBaseEntities = null;
+        if (queryRequ.getState() == 1) {
+//            辅导员查询
+            stuBaseEntities = stuBaseMapper.queryForCouner(queryRequ.getStuId(), queryRequ.getStuName());
+
+        } else {
+//            导师查询
+            stuBaseEntities = stuBaseMapper.queryByTutorId(queryRequ.getUserId());
+        }
+        String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
+        if (stuIds.equals("")){
+            resp.put("c", 200);
+            resp.put("r", getHonorResps);
+            return resp;
+        }
+        honorEntities = honorMapper.queryAllForTutor(status, stuIds, queryRequ.getHonorType());
+        for (HonorEntity honorEntity : honorEntities) {
+            StuBaseEntity stuBaseEntity = stuBaseMapper.queryByStuId(honorEntity.getStuId());
+            if (FormatUtil.isEmpty(stuBaseEntity)) {
+                continue;
+            }
+            GetHonorResp getHonorResp = adminModel.createGetHonorResp(honorEntity, stuBaseEntity);
+            getHonorResps.add(getHonorResp);
+        }
+        try {
+            Workbook workbook = ExcelUtil.copyFile(PropertiesUtil.prop("template_path_honor"));
+            int index = 1;
+            for (GetHonorResp getHonorResp : getHonorResps) {
+                adminModel.writeHonorIntoExcel(workbook, getHonorResp, index);
+                index = index + 1;
+            }
+            String fileName = DateUtil.getCurrentDatetime().split(" ")[0] + "_honor" + ".xlsx";
+            ExcelUtil.save(workbook, PropertiesUtil.prop("file_path") + fileName);
+            resp.put("c", 200);
+            resp.put("r", fileName);
+        } catch (IOException e) {
+            resp.put("c", 311);
+            resp.put("r", "文件创建错误");
+        }
+        return resp;
+    }
+
+    @Override
+    public Map<String, Object> downPapersForTeacher(QueryRequ queryRequ) {
+        Map<String, Object> resp = new HashMap<>();
+        String status = FormatUtil.strings2String(getIntAuditStatus(queryRequ.getStatus()));
+        List<PaperEntity> paperEntities = null;
+        List<GetPaperResp> getPaperResps = new LinkedList<GetPaperResp>();
+        List<StuBaseEntity> stuBaseEntities = null;
+        if (queryRequ.getState() == 1) {
+//            辅导员查询
+            stuBaseEntities = stuBaseMapper.queryForCouner(queryRequ.getStuId(), queryRequ.getStuName());
+
+        } else {
+//            导师查询
+            stuBaseEntities = stuBaseMapper.queryByTutorId(queryRequ.getUserId());
+        }
+        String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
+        if (stuIds.equals("")){
+            resp.put("c", 200);
+            resp.put("r", getPaperResps);
+            return resp;
+        }
+        paperEntities = paperMapper.queryAllForTutor(status, stuIds, queryRequ.getPaperGrade());
+        for (PaperEntity paperEntity : paperEntities) {
+            StuBaseEntity stuBaseEntity = stuBaseMapper.queryByStuId(paperEntity.getStuId());
+            if (FormatUtil.isEmpty(stuBaseEntity)) {
+                continue;
+            }
+            GetPaperResp getPaperResp = adminModel.createGetPaperResp(paperEntity, stuBaseEntity);
+            getPaperResps.add(getPaperResp);
+        }
+        try {
+            Workbook workbook = ExcelUtil.copyFile(PropertiesUtil.prop("template_path_paper"));
+            int index = 1;
+            for (GetPaperResp getPaperResp : getPaperResps) {
+                adminModel.writePaperIntoExcel(workbook, getPaperResp, index);
+                index = index + 1;
+            }
+            String fileName = DateUtil.getCurrentDatetime().split(" ")[0] + "_paper" + ".xlsx";
+            ExcelUtil.save(workbook, PropertiesUtil.prop("file_path") + fileName);
+            resp.put("c", 200);
+            resp.put("r", fileName);
+        } catch (IOException e) {
+            resp.put("c", 311);
+            resp.put("r", "文件创建错误");
+        }
+        return resp;
+    }
+
+    @Override
+    public Map<String, Object> downPatentsForTeacher(QueryRequ queryRequ) {
+        Map<String, Object> resp = new HashMap<>();
+        String status = FormatUtil.strings2String(getIntAuditStatus(queryRequ.getStatus()));
+        List<PatentEntity> patentEntities = null;
+        List<GetPatentResp> getPatentResps = new LinkedList<GetPatentResp>();
+        List<StuBaseEntity> stuBaseEntities = null;
+        if (queryRequ.getState() == 1) {
+//            辅导员查询
+            stuBaseEntities = stuBaseMapper.queryForCouner(queryRequ.getStuId(), queryRequ.getStuName());
+
+        } else {
+//            导师查询
+            stuBaseEntities = stuBaseMapper.queryByTutorId(queryRequ.getUserId());
+        }
+        String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
+        if (stuIds.equals("")){
+            resp.put("c", 200);
+            resp.put("r", getPatentResps);
+            return resp;
+        }
+        patentEntities = patentMapper.queryAllForTutor(status, stuIds, queryRequ.getPatentType(), queryRequ.getPatentState());
+        for (PatentEntity patentEntity : patentEntities) {
+            StuBaseEntity stuBaseEntity = stuBaseMapper.queryByStuId(patentEntity.getStuId());
+            if (FormatUtil.isEmpty(stuBaseEntity)) {
+                continue;
+            }
+            GetPatentResp getPatentResp = adminModel.createGetPatentResp(patentEntity, stuBaseEntity);
+            getPatentResps.add(getPatentResp);
+        }
+        try {
+            Workbook workbook = ExcelUtil.copyFile(PropertiesUtil.prop("template_path_patent"));
+            int index = 1;
+            for (GetPatentResp getPatentResp : getPatentResps) {
+                adminModel.writePatentIntoExcel(workbook, getPatentResp, index);
+                index = index + 1;
+            }
+            String fileName = DateUtil.getCurrentDatetime().split(" ")[0] + "_patent" + ".xlsx";
+            ExcelUtil.save(workbook, PropertiesUtil.prop("file_path") + fileName);
+            resp.put("c", 200);
+            resp.put("r", fileName);
+        } catch (IOException e) {
+            resp.put("c", 311);
+            resp.put("r", "文件创建错误");
+        }
+        return resp;
+    }
+
+    @Override
+    public Map<String, Object> downCompesForTeacher(QueryRequ queryRequ) {
+        Map<String, Object> resp = new HashMap<>();
+        String status = FormatUtil.strings2String(getIntAuditStatus(queryRequ.getStatus()));
+        List<CompetitionEntity> competitionEntities = null;
+        List<GetCompetitionResp> getCompetitionResps = new LinkedList<GetCompetitionResp>();
+        List<StuBaseEntity> stuBaseEntities = null;
+        if (queryRequ.getState() == 1) {
+//            辅导员查询
+            stuBaseEntities = stuBaseMapper.queryForCouner(queryRequ.getStuId(), queryRequ.getStuName());
+
+        } else {
+//            导师查询
+            stuBaseEntities = stuBaseMapper.queryByTutorId(queryRequ.getUserId());
+        }
+        String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
+        if (stuIds.equals("")){
+            resp.put("c", 200);
+            resp.put("r", getCompetitionResps);
+            return resp;
+        }
+        competitionEntities = competitionMapper.queryAllForTutor(status, stuIds, queryRequ.getCompetitionType(), queryRequ.getCompetitionLevel());
+        for (CompetitionEntity competitionEntity : competitionEntities) {
+            StuBaseEntity stuBaseEntity = stuBaseMapper.queryByStuId(competitionEntity.getStuId());
+            if (FormatUtil.isEmpty(stuBaseEntity)) {
+                continue;
+            }
+            GetCompetitionResp getCompetitionResp = adminModel.createGetCompetitionResp(competitionEntity, stuBaseEntity);
+            getCompetitionResps.add(getCompetitionResp);
+        }
+        try {
+            Workbook workbook = ExcelUtil.copyFile(PropertiesUtil.prop("template_path_competition"));
+            int index = 1;
+            for ( GetCompetitionResp getCompetitionResp : getCompetitionResps) {
+                adminModel.writeCompetitionIntoExcel(workbook, getCompetitionResp, index);
+                index = index + 1;
+            }
+            String fileName = DateUtil.getCurrentDatetime().split(" ")[0] + "_competition" + ".xlsx";
+            ExcelUtil.save(workbook, PropertiesUtil.prop("file_path") + fileName);
+            resp.put("c", 200);
+            resp.put("r", fileName);
+        } catch (IOException e) {
+            resp.put("c", 311);
+            resp.put("r", "文件创建错误");
+        }
+        return resp;
+    }
+
+    @Override
+    public Map<String, Object> downProjectsForTeacher(QueryRequ queryRequ) {
+        Map<String, Object> resp = new HashMap<>();
+        String status = FormatUtil.strings2String(getIntAuditStatus(queryRequ.getStatus()));
+        List<ProjectsEntity> projectsEntities = null;
+        List<GetProjectResp> getProjectResps = new LinkedList<GetProjectResp>();
+        List<StuBaseEntity> stuBaseEntities = null;
+        if (queryRequ.getState() == 1) {
+//            辅导员查询
+            stuBaseEntities = stuBaseMapper.queryForCouner(queryRequ.getStuId(), queryRequ.getStuName());
+
+        } else {
+//            导师查询
+            stuBaseEntities = stuBaseMapper.queryByTutorId(queryRequ.getUserId());
+        }
+        String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
+        if (stuIds.equals("")){
+            resp.put("c", 200);
+            resp.put("r", getProjectResps);
+            return resp;
+        }
+        projectsEntities = projectsMapper.queryAllForTutor(status, stuIds, queryRequ.getProClass(), queryRequ.getProType());
+        for (ProjectsEntity projectsEntity : projectsEntities) {
+            StuBaseEntity stuBaseEntity = stuBaseMapper.queryByStuId(projectsEntity.getStuId());
+            if (FormatUtil.isEmpty(stuBaseEntity)) {
+                continue;
+            }
+            GetProjectResp getProjectResp = adminModel.createGetProjectResp(projectsEntity, stuBaseEntity);
+            getProjectResps.add(getProjectResp);
+        }
+        try {
+            Workbook workbook = ExcelUtil.copyFile(PropertiesUtil.prop("template_path_project"));
+            int index = 1;
+            for (GetProjectResp getProjectResp : getProjectResps) {
+                adminModel.writeProjectIntoExcel(workbook, getProjectResp, index);
+                index = index + 1;
+            }
+            String fileName = DateUtil.getCurrentDatetime().split(" ")[0] + "_project" + ".xlsx";
+            ExcelUtil.save(workbook, PropertiesUtil.prop("file_path") + fileName);
+            resp.put("c", 200);
+            resp.put("r", fileName);
+        } catch (IOException e) {
+            resp.put("c", 311);
+            resp.put("r", "文件创建错误");
+        }
+        return resp;
+    }
+
+    @Override
+    public Map<String, Object> downAcadExchsForTeacher(QueryRequ queryRequ) {
+        Map<String, Object> resp = new HashMap<>();
+        String status = FormatUtil.strings2String(getIntAuditStatus(queryRequ.getStatus()));
+        List<AcademicExchangeEntity> academicExchangeEntities = null;
+        List<GetAcadExchResp> getAcadExchResps = new LinkedList<GetAcadExchResp>();
+        List<StuBaseEntity> stuBaseEntities = null;
+        if (queryRequ.getState() == 1) {
+//            辅导员查询
+            stuBaseEntities = stuBaseMapper.queryForCouner(queryRequ.getStuId(), queryRequ.getStuName());
+
+        } else {
+//            导师查询
+            stuBaseEntities = stuBaseMapper.queryByTutorId(queryRequ.getUserId());
+        }
+        String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
+        if (stuIds.equals("")){
+            resp.put("c", 200);
+            resp.put("r", getAcadExchResps);
+            return resp;
+        }
+        academicExchangeEntities = academicExchangeMapper.queryAllForTutor(status, stuIds, queryRequ.getExchangeType());
+        for (AcademicExchangeEntity academicExchangeEntity : academicExchangeEntities) {
+            StuBaseEntity stuBaseEntity = stuBaseMapper.queryByStuId(academicExchangeEntity.getStuId());
+            if (FormatUtil.isEmpty(stuBaseEntity)) {
+                continue;
+            }
+            GetAcadExchResp getAcadExchResp = adminModel.createGetAcadExchResp(academicExchangeEntity, stuBaseEntity);
+            getAcadExchResps.add(getAcadExchResp);
+        }
+        try {
+            Workbook workbook = ExcelUtil.copyFile(PropertiesUtil.prop("template_path_acad_exch"));
+            int index = 1;
+            for (GetAcadExchResp getAcadExchResp : getAcadExchResps) {
+                adminModel.writeAcadExchExcel(workbook, getAcadExchResp, index);
+                index = index + 1;
+            }
+            String fileName = DateUtil.getCurrentDatetime().split(" ")[0] + "_acad_exch" + ".xlsx";
+            ExcelUtil.save(workbook, PropertiesUtil.prop("file_path") + fileName);
+            resp.put("c", 200);
+            resp.put("r", fileName);
+        } catch (IOException e) {
+            resp.put("c", 311);
+            resp.put("r", "文件创建错误");
+        }
+        return resp;
+    }
+
+    @Override
+    public Map<String, Object> downWorksForTeacher(QueryRequ queryRequ) {
+        Map<String, Object> resp = new HashMap<>();
+        String status = FormatUtil.strings2String(getIntAuditStatus(queryRequ.getStatus()));
+        List<WorkEntity> workEntities = null;
+        List<GetWorkResp> getWorkResps = new LinkedList<GetWorkResp>();
+        List<StuBaseEntity> stuBaseEntities = null;
+        if (queryRequ.getState() == 1) {
+//            辅导员查询
+            stuBaseEntities = stuBaseMapper.queryForCouner(queryRequ.getStuId(), queryRequ.getStuName());
+
+        } else {
+//            导师查询
+            stuBaseEntities = stuBaseMapper.queryByTutorId(queryRequ.getUserId());
+        }
+        String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
+        if (stuIds.equals("")){
+            resp.put("c", 200);
+            resp.put("r", getWorkResps);
+            return resp;
+        }
+        workEntities = workMapper.queryAllForTutor(status, stuIds, queryRequ.getWorkType());
+        for (WorkEntity workEntity : workEntities) {
+            StuBaseEntity stuBaseEntity = stuBaseMapper.queryByStuId(workEntity.getStuId());
+            if (FormatUtil.isEmpty(stuBaseEntity)) {
+                continue;
+            }
+            GetWorkResp getWorkResp = adminModel.createGetWorkResp(workEntity, stuBaseEntity);
+            getWorkResps.add(getWorkResp);
+        }
+        try {
+            Workbook workbook = ExcelUtil.copyFile(PropertiesUtil.prop("template_path_work"));
+            int index = 1;
+            for (GetWorkResp getWorkResp : getWorkResps) {
+                adminModel.writeWorkIntoExcel(workbook, getWorkResp, index);
+                index = index + 1;
+            }
+            String fileName = DateUtil.getCurrentDatetime().split(" ")[0] + "_work" + ".xlsx";
+            ExcelUtil.save(workbook, PropertiesUtil.prop("file_path") + fileName);
+            resp.put("c", 200);
+            resp.put("r", fileName);
+        } catch (IOException e) {
+            resp.put("c", 311);
+            resp.put("r", "文件创建错误");
+        }
+        return resp;
+    }
+
+    @Override
+    public Map<String, Object> downMasterPapersForTeacher(QueryRequ queryRequ) {
+        Map<String, Object> resp = new HashMap<>();
+        String status = FormatUtil.strings2String(getIntAuditStatus(queryRequ.getStatus()));
+        List<MasterPaperEntity> masterPaperEntities = null;
+        List<GetMasterPaperResp> getMasterPaperResps = new LinkedList<GetMasterPaperResp>();
+        List<StuBaseEntity> stuBaseEntities = null;
+        if (queryRequ.getState() == 1) {
+//            辅导员查询
+            stuBaseEntities = stuBaseMapper.queryForCouner(queryRequ.getStuId(), queryRequ.getStuName());
+
+        } else {
+//            导师查询
+            stuBaseEntities = stuBaseMapper.queryByTutorId(queryRequ.getUserId());
+        }
+        String stuIds = FormatUtil.strings2String(getStuIds(stuBaseEntities));
+        if (stuIds.equals("")){
+            resp.put("c", 200);
+            resp.put("r", getMasterPaperResps);
+            return resp;
+        }
+        masterPaperEntities = masterPaperMapper.queryAllForTutor(status, stuIds);
+        for (MasterPaperEntity masterPaperEntity : masterPaperEntities) {
+            StuBaseEntity stuBaseEntity = stuBaseMapper.queryByStuId(masterPaperEntity.getStuId());
+            if (FormatUtil.isEmpty(stuBaseEntity)) {
+                continue;
+            }
+            GetMasterPaperResp getMasterPaperResp = adminModel.createGetMasterPaperResp(masterPaperEntity, stuBaseEntity);
+            getMasterPaperResps.add(getMasterPaperResp);
+        }
+        try {
+            Workbook workbook = ExcelUtil.copyFile(PropertiesUtil.prop("template_path_master_paper"));
+            int index = 1;
+            for (GetMasterPaperResp getMasterPaperResp : getMasterPaperResps) {
+                adminModel.writeMasterPaperIntoExcel(workbook, getMasterPaperResp, index);
+                index = index + 1;
+            }
+            String fileName = DateUtil.getCurrentDatetime().split(" ")[0] + "_master_paper" + ".xlsx";
+            ExcelUtil.save(workbook, PropertiesUtil.prop("file_path") + fileName);
+            resp.put("c", 200);
+            resp.put("r", fileName);
+        } catch (IOException e) {
+            resp.put("c", 311);
+            resp.put("r", "文件创建错误");
+        }
+        return resp;
     }
 
 
